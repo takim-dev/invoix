@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(php -l e:/laragon/www/invoice-app/app/Controllers/AdminController.php)",
+      "Bash(php -l e:/laragon/www/invoice-app/app/Config/Routes.php)",
+      "Bash(php -l e:/laragon/www/invoice-app/app/Views/admin/email_config.php)",
+      "Bash(php -l e:/laragon/www/invoice-app/app/Views/email/test_email.php)",
+      "Bash(grep -vE \"^$\")",
+      "Bash(git -C e:/laragon/www/invoice-app log --oneline -20)",
+      "Bash(php -l app/Controllers/InvoiceController.php)",
+      "Bash(php spark *)"
+    ]
+  }
+}
