@@ -37,6 +37,7 @@ return [
     'paid'                  => 'Lunas',
     'unpaid'                => 'Belum Lunas',
     'cancelled'             => 'Dibatalkan',
+	'status_updated'        => 'Status diubah ke {0}',
 
     // Invoice table headers
     'invoice_number_col'    => 'No. Faktur',
@@ -69,7 +70,7 @@ return [
     'invoice_title'         => 'FAKTUR',
     'print_invoice'         => 'Cetak Faktur',
     'back_to_invoice'       => '← Kembali ke Faktur',
-    'generated_by'          => 'Dibuat oleh InvoiceApp — ',
+    'generated_by'          => 'Dibuat oleh',
     'logo_alt'              => 'Logo',
 
     // Invoice actions
@@ -85,6 +86,7 @@ return [
     'make_private'          => 'Jadikan Pribadi',
     'copy_link'             => 'Salin Tautan',
     'link_copied'           => 'Tautan disalin!',
+    'copy_link_fallback'    => 'Salin tautan ini:',
     'public_invoice'        => 'Faktur Publik',
     'invoice_not_found'     => 'Faktur Tidak Ditemukan',
     'invoice_not_found_desc'=> 'Faktur ini tidak tersedia atau telah dijadikan pribadi.',
@@ -173,6 +175,8 @@ return [
     // ===== ACCOUNT =====
     'account'               => 'Akun',
     'role'                  => 'Peran',
+    'role_admin'            => 'Admin',
+    'role_user'             => 'Pengguna',
     'total_invoices_created'=> 'Total faktur dibuat',
     'company_limit'         => 'Batas pembuatan perusahaan',
     'invoice_limit'         => 'Batas pembuatan faktur',

@@ -71,6 +71,7 @@
                         <i class="bi bi-pencil me-1"></i> <?= lang('App.edit') ?>
                     </a>
                     <form action="/companies/<?= $c['id'] ?>/delete" method="POST" class="d-inline" data-confirm="<?= lang('App.delete_company_confirm') ?>">
+<?= csrf_field() ?>
                         <button class="btn btn-sm btn-outline-danger">
                             <i class="bi bi-trash me-1"></i> <?= lang('App.delete') ?>
                         </button>

@@ -17,6 +17,7 @@
     <div class="card">
         <div class="card-body p-4">
             <form action="/companies/<?= $company['id'] ?>/update" method="POST" enctype="multipart/form-data">
+<?= csrf_field() ?>
                 <div class="mb-3">
                     <label class="form-label"><?= lang('App.company_name') ?> <span class="text-danger">*</span></label>
                     <input type="text" name="name" class="form-control" required value="<?= esc($company['name']) ?>">

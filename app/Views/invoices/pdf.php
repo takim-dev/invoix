@@ -1,3 +1,4 @@
+<?php $appName = $appName ?? model('SettingModel')->getSetting('app_name', 'InvoiceApp'); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,7 +73,7 @@
                     <?php if ($invoice['due_date']): ?>
                         <div class="inv-date"><?= esc(lang('App.due_date')) ?>: <?= date('d M Y', strtotime($invoice['due_date'])) ?></div>
                     <?php endif; ?>
-                    <span class="status-badge status-<?= $invoice['status'] ?>"><?= ucfirst($invoice['status']) ?></span>
+                    <span class="status-badge status-<?= $invoice['status'] ?>"><?= esc(lang('App.' . $invoice['status'])) ?></span>
                 </td>
             </tr>
         </table>
@@ -127,7 +128,7 @@
         <?php endif; ?>
 
         <div class="footer">
-            <?= esc(lang('App.generated_by')) ?><?= date('d M Y H:i') ?>
+            <?= esc(lang('App.generated_by')) ?> <?= esc($appName) ?> &mdash; <?= date('d M Y H:i') ?>
         </div>
     </div>
 </body>

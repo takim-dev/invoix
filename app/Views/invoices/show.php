@@ -17,6 +17,7 @@
         </span>
         <a href="/invoices/<?= $invoice['id'] ?>/edit" class="btn btn-warning btn-sm me-1"><i class="bi bi-pencil me-1"></i> <?= esc(lang('App.edit')) ?></a>
         <form action="/invoices/<?= $invoice['id'] ?>/delete" method="POST" class="d-inline" data-confirm="<?= esc(lang('App.delete_invoice_confirm')) ?>">
+<?= csrf_field() ?>
             <button class="btn btn-danger btn-sm"><i class="bi bi-trash me-1"></i> <?= esc(lang('App.delete_btn')) ?></button>
         </form>
         <a href="/invoices" class="btn btn-outline-secondary btn-sm ms-1"><i class="bi bi-arrow-left me-1"></i> <?= esc(lang('App.back')) ?></a>
@@ -42,7 +43,7 @@
                 <h5><?= esc($invoice['invoice_number']) ?></h5>
                 <p class="text-muted" style="margin:0;"><?= esc(lang('App.invoice_date')) ?>: <?= date('d M Y', strtotime($invoice['invoice_date'])) ?></p>
                 <?php if ($invoice['due_date']): ?><p class="text-muted" style="margin:0;"><?= esc(lang('App.due_date')) ?>: <?= date('d M Y', strtotime($invoice['due_date'])) ?></p><?php endif; ?>
-                <p class="mt-2"><span class="badge badge-<?= $invoice['status'] ?>" style="font-size:0.85rem;"><?= ucfirst($invoice['status']) ?></span></p>
+                <p class="mt-2"><span class="badge badge-<?= $invoice['status'] ?>" style="font-size:0.85rem;"><?= esc(lang('App.' . $invoice['status'])) ?></span></p>
             </div>
         </div>
     </div>
@@ -122,7 +123,7 @@ document.getElementById('shareToggleBtn').addEventListener('click', function() {
         method: 'POST',
         headers: {
             'X-Requested-With': 'XMLHttpRequest',
-            'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '<?= csrf_hash() ?>'
         }
     })
     .then(r => r.json())
@@ -138,19 +139,38 @@ document.getElementById('shareToggleBtn').addEventListener('click', function() {
     .finally(() => { btn.disabled = false; });
 });
 
+function copyToClipboard(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+        return navigator.clipboard.writeText(text);
+    }
+    return new Promise((resolve, reject) => {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.left = '-9999px';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy') ? resolve() : reject(new Error('execCommand')); }
+        catch (e) { reject(e); }
+        document.body.removeChild(ta);
+    });
+}
+
 document.getElementById('copyLinkBtn').addEventListener('click', function() {
     const url = this.dataset.url || '';
     if (!url) return;
-    navigator.clipboard.writeText(url).then(() => {
-        const orig = this.innerHTML;
-        this.innerHTML = '<i class="bi bi-check-lg me-1"></i> <?= esc(lang('App.link_copied')) ?>';
-        this.classList.add('btn-success');
-        this.classList.remove('btn-outline-secondary');
+    const btn = this, origHTML = btn.innerHTML;
+    copyToClipboard(url).then(() => {
+        btn.innerHTML = '<i class="bi bi-check-lg me-1"></i> <?= esc(lang('App.link_copied')) ?>';
+        btn.classList.add('btn-success');
+        btn.classList.remove('btn-outline-secondary');
         setTimeout(() => {
-            this.innerHTML = orig;
-            this.classList.remove('btn-success');
-            this.classList.add('btn-outline-secondary');
+            btn.innerHTML = origHTML;
+            btn.classList.remove('btn-success');
+            btn.classList.add('btn-outline-secondary');
         }, 2000);
+    }).catch(() => {
+        prompt('<?= esc(lang('App.copy_link_fallback') ?? '') ?>', url);
     });
 });
 

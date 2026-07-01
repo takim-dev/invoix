@@ -37,6 +37,7 @@ return [
     'paid'                  => 'Đã thanh toán',
     'unpaid'                => 'Chưa thanh toán',
     'cancelled'             => 'Đã hủy',
+    'status_updated'        => 'Trạng thái đã đổi thành {0}',
 
     // Invoice table headers
     'invoice_number_col'    => 'Hóa đơn #',
@@ -69,7 +70,7 @@ return [
     'invoice_title'         => 'HÓA ĐƠN',
     'print_invoice'         => 'In hóa đơn',
     'back_to_invoice'       => 'Quay lại hóa đơn',
-    'generated_by'          => 'Được tạo bởi InvoiceApp — ',
+    'generated_by'          => 'Được tạo bởi',
     'logo_alt'              => 'Logo',
 
     // Invoice actions
@@ -85,6 +86,7 @@ return [
     'make_private'          => 'Đặt Riêng tư',
     'copy_link'             => 'Sao chép Liên kết',
     'link_copied'           => 'Đã sao chép liên kết!',
+    'copy_link_fallback'    => '',
     'public_invoice'        => 'Hóa đơn Công khai',
     'invoice_not_found'     => 'Không tìm thấy Hóa đơn',
     'invoice_not_found_desc'=> 'Hóa đơn này không khả dụng hoặc đã được đặt riêng tư.',
@@ -173,6 +175,7 @@ return [
     // ===== ACCOUNT =====
     'account'               => 'Tài khoản',
     'role'                  => 'Vai trò',
+'role_admin'            => 'Admin',    'role_user'             => 'User',
     'total_invoices_created'=> 'Tổng số hóa đơn đã tạo',
     'company_limit'         => 'Giới hạn tạo công ty',
     'invoice_limit'         => 'Giới hạn tạo hóa đơn',

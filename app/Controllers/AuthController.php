@@ -124,28 +124,19 @@ class AuthController extends AppController {
 
     private function sendVerificationEmail($email, $name, $token): bool
     {
-        $emailConfig = json_decode($this->settingModel->getSetting('email_config', '{}'), true);
-
-        if (empty($emailConfig['host'])) {
-            return false;
-        }
-
-        $emailService = \Config\Services::email();
-        $emailService->initialize($this->buildEmailConfig($emailConfig));
-
+        $emailService = new \App\Services\EmailService();
+        $appName = $this->settingModel->getSetting('app_name', 'InvoiceApp');
         $verificationUrl = site_url('/verify-email/' . $token);
-        $appName = $this->settingModel->getSetting('app_name', 'Invoice App');
 
-        $emailService->setFrom($emailConfig['from_email'] ?? $emailConfig['user'] ?? '', $emailConfig['from_name'] ?? $appName);
-        $emailService->setTo($email);
-        $emailService->setSubject('Verify Your Email - ' . $appName);
-        $emailService->setMessage(view('email/verify_email', [
-            'name' => $name,
-            'verification_url' => $verificationUrl,
-            'app_name' => $appName,
-        ]));
-
-        return $emailService->send();
+        return $emailService->send(
+            $email,
+            'Verify Your Email - ' . $appName,
+            view('email/verify_email', [
+                'name' => $name,
+                'verification_url' => $verificationUrl,
+                'app_name' => $appName,
+            ])
+        );
     }
 
     public function logout() {

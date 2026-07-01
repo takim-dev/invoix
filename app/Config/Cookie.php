@@ -54,6 +54,7 @@ class Cookie extends BaseConfig
      *
      * Cookie will only be set if a secure HTTPS connection exists.
      */
+    // Set to true for HTTPS production. Override via .env: cookie.secure=true
     public bool $secure = false;
 
     /**

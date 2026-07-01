@@ -37,6 +37,7 @@ return [
     'paid'                  => 'Dibayar',
     'unpaid'                => 'Belum Dibayar',
     'cancelled'             => 'Dibatalkan',
+    'status_updated'        => 'Status diubah ke {0}',
 
     // Invoice table headers
     'invoice_number_col'    => 'Invois #',
@@ -69,7 +70,7 @@ return [
     'invoice_title'         => 'INVOIS',
     'print_invoice'         => 'Cetak Invois',
     'back_to_invoice'       => 'Kembali ke Invois',
-    'generated_by'          => 'Dijana oleh InvoiceApp — ',
+    'generated_by'          => 'Dijana oleh',
     'logo_alt'              => 'Logo',
 
     // Invoice actions
@@ -85,6 +86,7 @@ return [
     'make_private'          => 'Jadikan Peribadi',
     'copy_link'             => 'Salin Pautan',
     'link_copied'           => 'Pautan disalin!',
+    'copy_link_fallback'    => '',
     'public_invoice'        => 'Invois Awam',
     'invoice_not_found'     => 'Invois Tidak Ditemui',
     'invoice_not_found_desc'=> 'Invois ini tidak tersedia atau telah dijadikan peribadi.',
@@ -173,6 +175,7 @@ return [
     // ===== ACCOUNT =====
     'account'               => 'Akaun',
     'role'                  => 'Peranan',
+'role_admin'            => 'Admin',    'role_user'             => 'User',
     'total_invoices_created'=> 'Jumlah invois dicipta',
     'company_limit'         => 'Had penciptaan syarikat',
     'invoice_limit'         => 'Had penciptaan invois',

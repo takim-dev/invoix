@@ -128,6 +128,32 @@ class AppController extends Controller {
     }
 
     /**
+     * Verify the fetched entity belongs to the current user.
+     * Returns the entity if valid, or null if not owned / not found.
+     */
+    protected function verifyOwnership(?array $entity): ?array
+    {
+        if (!$entity || ($entity['user_id'] ?? null) !== session()->get('user_id')) {
+            return null;
+        }
+        return $entity;
+    }
+
+    /**
+     * Pre-populate view data with app settings (name, logo, footer).
+     * Merge with the given data array — passed values take precedence.
+     */
+    protected function viewData(array $data = []): array
+    {
+        $settingModel = model('SettingModel');
+        return array_merge([
+            'appName'    => $settingModel->getSetting('app_name', 'InvoiceApp'),
+            'appLogo'    => $settingModel->getSetting('app_logo', ''),
+            'footerText' => $settingModel->getSetting('footer_text', ''),
+        ], $data);
+    }
+
+    /**
      * Parse DataTables jQuery GET params into a normalized pagination+order array.
      *
      * @param array  $columns      Indexed column map (position => DB column).

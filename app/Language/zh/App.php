@@ -37,6 +37,7 @@ return [
     'paid'                  => '已付款',
     'unpaid'                => '未付款',
     'cancelled'             => '已取消',
+    'status_updated'        => '状态已更新为 {0}',
 
     // Invoice table headers
     'invoice_number_col'    => '发票号',
@@ -69,7 +70,7 @@ return [
     'invoice_title'         => '发票',
     'print_invoice'         => '打印发票',
     'back_to_invoice'       => '返回发票',
-    'generated_by'          => '由 InvoiceApp 生成 — ',
+    'generated_by'          => '由',
     'logo_alt'              => '标志',
 
     // Invoice actions
@@ -85,6 +86,7 @@ return [
     'make_private'          => '设为私密',
     'copy_link'             => '复制链接',
     'link_copied'           => '链接已复制！',
+    'copy_link_fallback'    => '',
     'public_invoice'        => '公开发票',
     'invoice_not_found'     => '未找到发票',
     'invoice_not_found_desc'=> '此发票不可用或已被设为私密。',
@@ -173,6 +175,7 @@ return [
     // ===== ACCOUNT =====
     'account'               => '账户',
     'role'                  => '角色',
+'role_admin'            => 'Admin',    'role_user'             => 'User',
     'total_invoices_created'=> '已创建的发票总数',
     'company_limit'         => '公司创建上限',
     'invoice_limit'         => '发票创建上限',

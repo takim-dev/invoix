@@ -17,6 +17,7 @@
     <div class="card">
         <div class="card-body p-4">
             <form action="/companies/store" method="POST" enctype="multipart/form-data">
+<?= csrf_field() ?>
                 <div class="mb-3">
                     <label class="form-label"><?= lang('App.company_name') ?> <span class="text-danger">*</span></label>
                     <input type="text" name="name" id="companyName" class="form-control" required placeholder="<?= lang('App.company_name_ph') ?>" value="<?= esc(old('name')) ?>">

@@ -66,8 +66,8 @@ class AdminController extends AppController {
                 $pagination['start'] + $index + 1,
                 '<span class="admin-user-name">' . esc($user['name']) . '</span>',
                 '<span class="admin-user-email" title="' . esc($user['email']) . '">' . esc($user['email']) . '</span>',
-                '<span class="badge role-badge ' . ($user['role'] === self::ROLE_ADMIN ? 'role-badge-admin' : 'role-badge-user') . '" style="background:' . ($user['role'] === self::ROLE_ADMIN ? 'rgba(101,113,255,0.18)' : 'rgba(150,150,150,0.16)') . ';color:' . ($user['role'] === self::ROLE_ADMIN ? '#a29bfe' : '#999') . ';">' . esc(ucfirst($user['role'])) . '</span>',
-                '<span class="badge status-badge status-badge-' . esc($status) . '">' . esc(ucfirst($status)) . '</span>',
+                '<span class="badge role-badge ' . ($user['role'] === self::ROLE_ADMIN ? 'role-badge-admin' : 'role-badge-user') . '" style="background:' . ($user['role'] === self::ROLE_ADMIN ? 'rgba(101,113,255,0.18)' : 'rgba(150,150,150,0.16)') . ';color:' . ($user['role'] === self::ROLE_ADMIN ? '#a29bfe' : '#999') . ';">' . esc(lang('App.role_' . $user['role'])) . '</span>',
+                '<span class="badge status-badge status-badge-' . esc($status) . '">' . esc(lang('App.' . $status)) . '</span>',
                 '<span class="admin-user-count">' . $companyCount . '</span>',
                 '<span class="admin-user-count">' . $invoiceCount . '</span>',
                 '<span class="admin-user-limits">' . (int) $user['max_companies'] . ' co / ' . (int) $user['max_invoices'] . ' inv</span>',
@@ -150,7 +150,7 @@ class AdminController extends AppController {
     }
 
     public function settings() {
-        $settingModel = new SettingModel();
+        $settingModel = model('SettingModel');
         $settings = $settingModel->getAllSettings();
 
         if ($this->request->getMethod() === 'POST') {
@@ -179,7 +179,7 @@ class AdminController extends AppController {
     }
 
     public function invoiceConfig() {
-        $settingModel = new SettingModel();
+        $settingModel = model('SettingModel');
         if ($this->request->getMethod() === 'POST') {
             if (!$this->validate(Validation::$invoiceConfig)) {
                 return $this->failValidation('/admin/invoice-config');
@@ -195,7 +195,7 @@ class AdminController extends AppController {
     }
 
     public function authSettings() {
-        $settingModel = new SettingModel();
+        $settingModel = model('SettingModel');
         if ($this->request->getMethod() === 'POST') {
             if (!$this->validate(Validation::$authSettings)) {
                 return $this->failValidation('/admin/auth-settings');
@@ -212,7 +212,7 @@ class AdminController extends AppController {
     }
 
     public function pages() {
-        $settingModel = new SettingModel();
+        $settingModel = model('SettingModel');
 
         if ($this->request->getMethod() === 'POST') {
             foreach ([
@@ -240,7 +240,7 @@ class AdminController extends AppController {
     }
 
     public function emailConfig() {
-        $settingModel = new SettingModel();
+        $settingModel = model('SettingModel');
         if ($this->request->getMethod() === 'POST') {
             $emailConfig = [
                 'protocol'   => $this->request->getPost('protocol') ?: 'smtp',
@@ -277,34 +277,31 @@ class AdminController extends AppController {
             return $this->response->setJSON(['success' => false, 'message' => 'Please enter a valid recipient email address.']);
         }
 
-        $settingModel = new SettingModel();
-        $emailConfig = json_decode($settingModel->getSetting('email_config', '{}'), true);
-        if (empty($emailConfig['host'])) {
+        $settingModel = model('SettingModel');
+        $appName = $settingModel->getSetting('app_name', 'InvoiceApp');
+
+        $emailService = new \App\Services\EmailService();
+        $config = $emailService->getConfig();
+
+        if (empty($config['host'])) {
             return $this->response->setJSON(['success' => false, 'message' => 'SMTP host is not configured. Please save your SMTP settings first.']);
         }
 
-        $appName = $settingModel->getSetting('app_name', 'Invoice App');
-
-        $emailService = \Config\Services::email();
-        $emailService->initialize($this->buildEmailConfig($emailConfig));
-        $emailService->setTo($testEmail);
-        $emailService->setFrom($emailConfig['from_email'] ?? $emailConfig['user'] ?? '', $emailConfig['from_name'] ?? $appName);
-        $emailService->setSubject('Test Email from ' . $appName);
-        $emailService->setMessage(view('email/test_email', [
-            'app_name' => $appName,
-            'recipient' => $testEmail,
-            'sent_at' => date('Y-m-d H:i:s'),
-        ]));
-
-        $sent = $emailService->send();
-        $debug = $emailService->printDebugger(['headers', 'subject', 'body']);
+        $sent = $emailService->send(
+            $testEmail,
+            'Test Email from ' . $appName,
+            view('email/test_email', [
+                'app_name'  => $appName,
+                'recipient' => $testEmail,
+                'sent_at'   => date('Y-m-d H:i:s'),
+            ])
+        );
 
         return $this->response->setJSON([
             'success' => (bool) $sent,
             'message' => $sent
                 ? 'Test email sent successfully to ' . $testEmail . '. Please check the inbox (and spam folder).'
                 : 'Failed to send test email. Please check your SMTP configuration.',
-            'debug' => is_array($debug) ? implode("\n", $debug) : (string) $debug,
         ]);
     }
 

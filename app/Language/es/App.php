@@ -37,6 +37,7 @@ return [
     'paid'                  => 'Pagada',
     'unpaid'                => 'Pendiente',
     'cancelled'             => 'Cancelada',
+    'status_updated'        => 'Estado cambiado a {0}',
 
     // Encabezados de tabla de facturas
     'invoice_number_col'    => 'Factura #',
@@ -69,7 +70,7 @@ return [
     'invoice_title'         => 'FACTURA',
     'print_invoice'         => 'Imprimir Factura',
     'back_to_invoice'       => 'Volver a la Factura',
-    'generated_by'          => 'Generado por InvoiceApp — ',
+    'generated_by'          => 'Generado por',
     'logo_alt'              => 'Logo',
 
     // Acciones de factura
@@ -85,6 +86,7 @@ return [
     'make_private'          => 'Hacer Privada',
     'copy_link'             => 'Copiar Enlace',
     'link_copied'           => '¡Enlace copiado!',
+    'copy_link_fallback'    => '',
     'public_invoice'        => 'Factura Pública',
     'invoice_not_found'     => 'Factura No Encontrada',
     'invoice_not_found_desc'=> 'Esta factura no está disponible o se ha hecho privada.',
@@ -173,6 +175,7 @@ return [
     // ===== CUENTA =====
     'account'               => 'Cuenta',
     'role'                  => 'Rol',
+'role_admin'            => 'Admin',    'role_user'             => 'User',
     'total_invoices_created'=> 'Total de facturas creadas',
     'company_limit'         => 'Límite de creación de empresas',
     'invoice_limit'         => 'Límite de creación de facturas',

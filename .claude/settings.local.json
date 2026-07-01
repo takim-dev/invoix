@@ -8,7 +8,8 @@
       "Bash(grep -vE \"^$\")",
       "Bash(git -C e:/laragon/www/invoice-app log --oneline -20)",
       "Bash(php -l app/Controllers/InvoiceController.php)",
-      "Bash(php spark *)"
+      "Bash(php spark *)",
+      "Bash(php -r ' *)"
     ]
   }
 }

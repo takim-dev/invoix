@@ -1,14 +1,14 @@
 <?php
-$settingModel = new \App\Models\SettingModel();
-$appName = $settingModel->getSetting('app_name', 'InvoiceApp');
-$appLogo = $settingModel->getSetting('app_logo', '');
-$footerText = $settingModel->getSetting('footer_text', 'Powered by CodeIgniter 4');
+$appName = model('SettingModel')->getSetting('app_name', 'InvoiceApp');
+$appLogo = model('SettingModel')->getSetting('app_logo', '');
+$footerText = model('SettingModel')->getSetting('footer_text', '');
 ?>
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="<?= csrf_hash() ?>">
     <title><?= $this->renderSection('title') ?> - <?= esc($appName) ?></title>
 
     <!-- Theme init (prevent flash) -->
@@ -23,6 +23,13 @@ $footerText = $settingModel->getSetting('footer_text', 'Powered by CodeIgniter 4
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <!-- Favicon (follows app logo) -->
+    <?php if (!empty($appLogo)): ?>
+    <link rel="icon" type="image/png" href="<?= esc($appLogo) ?>">
+    <?php else: ?>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <?php endif; ?>
 
     <!-- Core CSS -->
     <link rel="stylesheet" href="/assets/vendors/core/core.css">
@@ -439,7 +446,7 @@ $footerText = $settingModel->getSetting('footer_text', 'Powered by CodeIgniter 4
             <!-- Footer -->
             <div class="footer-wrapper">
                 <div class="footer-section">
-                    <?= esc($footerText) ?> &mdash; &copy; <?= date('Y') ?> <?= esc($appName) ?>
+                    &copy; <?= date('Y') ?> <?= esc($appName) ?><?php if (!empty($footerText)): ?> &mdash; <?= esc($footerText) ?><?php endif; ?>
                 </div>
             </div>
         </div>

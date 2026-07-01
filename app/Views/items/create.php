@@ -12,6 +12,7 @@
     <div class="card">
         <div class="card-body">
             <form action="/items/store" method="POST">
+<?= csrf_field() ?>
                 <div class="mb-3">
                     <label class="form-label"><?= esc(lang('App.item_name')) ?> *</label>
                     <input type="text" name="name" class="form-control" required placeholder="<?= lang('App.widget_pro') ?>">

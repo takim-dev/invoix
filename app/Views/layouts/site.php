@@ -1,8 +1,8 @@
 <?php
     // Shared chrome for public-facing pages (landing, about, contact).
     // Page views extend this and provide their own styles + content sections.
-    $appName     = $appName     ?? (new \App\Models\SettingModel())->getSetting('app_name', 'InvoiceApp');
-    $appLogo     = $appLogo     ?? (new \App\Models\SettingModel())->getSetting('app_logo', '');
+    $appName     = $appName     ?? model('SettingModel')->getSetting('app_name', 'InvoiceApp');
+    $appLogo     = $appLogo     ?? model('SettingModel')->getSetting('app_logo', '');
     $isLoggedIn  = $isLoggedIn  ?? (bool) session()->get('user_id');
     $userName    = $userName    ?? session()->get('user_name');
 
@@ -31,6 +31,13 @@
             document.documentElement.setAttribute('data-bs-theme', t);
         })();
     </script>
+
+    <!-- Favicon (follows app logo) -->
+    <?php if (!empty($appLogo)): ?>
+    <link rel="icon" type="image/png" href="<?= esc($appLogo) ?>">
+    <?php else: ?>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <?php endif; ?>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

@@ -37,6 +37,7 @@ return [
     'paid'                  => 'مدفوعة',
     'unpaid'                => 'غير مدفوعة',
     'cancelled'             => 'ملغاة',
+    'status_updated'        => 'تم تغيير الحالة إلى {0}',
 
     // Invoice table headers
     'invoice_number_col'    => 'رقم الفاتورة',
@@ -69,7 +70,7 @@ return [
     'invoice_title'         => 'فاتورة',
     'print_invoice'         => 'طباعة الفاتورة',
     'back_to_invoice'       => 'العودة إلى الفاتورة',
-    'generated_by'          => 'تم إنشاؤها بواسطة InvoiceApp — ',
+    'generated_by'          => 'تم إنشاؤها بواسطة',
     'logo_alt'              => 'الشعار',
 
     // Invoice actions
@@ -85,6 +86,7 @@ return [
     'make_private'          => 'جعلها خاصة',
     'copy_link'             => 'نسخ الرابط',
     'link_copied'           => 'تم نسخ الرابط!',
+    'copy_link_fallback'    => '',
     'public_invoice'        => 'فاتورة عامة',
     'invoice_not_found'     => 'الفاتورة غير موجودة',
     'invoice_not_found_desc'=> 'هذه الفاتورة غير متاحة أو تم جعلها خاصة.',
@@ -173,6 +175,7 @@ return [
     // ===== ACCOUNT =====
     'account'               => 'الحساب',
     'role'                  => 'الدور',
+'role_admin'            => 'Admin',    'role_user'             => 'User',
     'total_invoices_created'=> 'إجمالي الفواتير المنشأة',
     'company_limit'         => 'حد إنشاء الشركات',
     'invoice_limit'         => 'حد إنشاء الفواتير',

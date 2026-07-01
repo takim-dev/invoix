@@ -71,8 +71,7 @@ class InvoiceModel extends Model {
     }
 
     public function getWithCompany($id) {
-        return $this->select('invoices.*, companies.name as company_name, companies.address as company_address, companies.phone as company_phone, companies.email as company_email, companies.tax_number as company_tax_number, companies.logo as company_logo')
-            ->join('companies', 'companies.id = invoices.company_id', 'left')
+        return $this->withCompanySelect()
             ->where('invoices.id', $id)
             ->first();
     }
@@ -108,7 +107,7 @@ class InvoiceModel extends Model {
         $invoice = $this->where('id', $invoiceId)->where('user_id', $userId)->first();
         if (!$invoice) return null;
 
-        if ($invoice['is_public']) {
+        if (!empty($invoice['is_public'] ?? false)) {
             $this->update($invoiceId, ['is_public' => 0, 'public_token' => null]);
             return ['is_public' => false, 'url' => null];
         }
@@ -119,11 +118,22 @@ class InvoiceModel extends Model {
     }
 
     public function findByPublicToken($token) {
-        return $this->select('invoices.*, companies.name as company_name, companies.address as company_address, companies.phone as company_phone, companies.email as company_email, companies.tax_number as company_tax_number, companies.logo as company_logo')
-            ->join('companies', 'companies.id = invoices.company_id', 'left')
+        return $this->withCompanySelect()
             ->where('invoices.public_token', $token)
             ->where('invoices.is_public', 1)
             ->first();
+    }
+
+    /**
+     * Shared query builder fragment: SELECT + JOIN for company details.
+     */
+    private function withCompanySelect()
+    {
+        return $this->select(
+            'invoices.*, companies.name as company_name, companies.address as company_address, ' .
+            'companies.phone as company_phone, companies.email as company_email, ' .
+            'companies.tax_number as company_tax_number, companies.logo as company_logo'
+        )->join('companies', 'companies.id = invoices.company_id', 'left');
     }
 
     public function calculateTotals($invoiceId) {

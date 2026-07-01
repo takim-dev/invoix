@@ -1,6 +1,9 @@
 <?php
 namespace App\Controllers;
 
+use Dompdf\Dompdf;
+use Dompdf\Options;
+
 use App\Models\InvoiceModel;
 use App\Models\InvoiceItemModel;
 use App\Models\CompanyModel;
@@ -70,7 +73,7 @@ class InvoiceController extends AppController {
                 '<span class="invoice-client">' . esc($invoice['client_name']) . '</span>',
                 '<span class="invoice-company" title="' . esc($invoice['company_name']) . '">' . esc($invoice['company_name']) . '</span>',
                 '<span class="invoice-total">' . format_currency($invoice['total'], $invoice['currency'] ?? self::DEFAULT_CURRENCY) . '</span>',
-                '<span class="badge badge-' . esc($invoice['status']) . '">' . esc(ucfirst($invoice['status'])) . '</span>',
+                '<span class="badge badge-' . esc($invoice['status']) . '">' . esc(lang('App.' . $invoice['status'])) . '</span>',
                 '<span class="invoice-date">' . date('d M Y', strtotime($invoice['invoice_date'])) . '</span>',
                 '<div class="invoice-actions">'
                     . '<a href="' . site_url('invoices/' . $id) . '" class="btn btn-sm btn-info" title="View" aria-label="View invoice"><i class="bi bi-eye"></i></a>'
@@ -101,7 +104,7 @@ class InvoiceController extends AppController {
                 $invoice['invoice_number'],
                 $invoice['client_name'],
                 $invoice['company_name'],
-                ucfirst($invoice['status']),
+                lang('App.' . $invoice['status']),
                 $invoice['invoice_date'],
                 $invoice['due_date'],
                 $invoice['currency'] ?? self::DEFAULT_CURRENCY,
@@ -199,10 +202,8 @@ class InvoiceController extends AppController {
     }
 
     public function show($id) {
-        $invoice = $this->invoiceModel->getWithCompany($id);
-        if (!$invoice || $invoice['user_id'] != $this->currentUserId()) {
-            return redirect()->to('/invoices')->with('error', 'Not found.');
-        }
+        $invoice = $this->verifyOwnership($this->invoiceModel->getWithCompany($id));
+        if (!$invoice) return redirect()->to('/invoices')->with('error', 'Not found.');
         return view('invoices/show', [
             'user' => $this->getUser(),
             'invoice' => $invoice,
@@ -211,10 +212,8 @@ class InvoiceController extends AppController {
     }
 
     public function edit($id) {
-        $invoice = $this->invoiceModel->getWithCompany($id);
-        if (!$invoice || $invoice['user_id'] != $this->currentUserId()) {
-            return redirect()->to('/invoices')->with('error', 'Not found.');
-        }
+        $invoice = $this->verifyOwnership($this->invoiceModel->getWithCompany($id));
+        if (!$invoice) return redirect()->to('/invoices')->with('error', 'Not found.');
         $userId = $this->currentUserId();
         return view('invoices/edit', [
             'user' => $this->getUser(),
@@ -226,10 +225,8 @@ class InvoiceController extends AppController {
     }
 
     public function update($id) {
-        $invoice = $this->invoiceModel->find($id);
-        if (!$invoice || $invoice['user_id'] != $this->currentUserId()) {
-            return redirect()->to('/invoices')->with('error', 'Not found.');
-        }
+        $invoice = $this->getOwnedEntity($this->invoiceModel, $id, '/invoices');
+        if (!$invoice) return redirect()->to('/invoices');
 
         if (!$this->validate(Validation::$invoice)) {
             return $this->failValidation();
@@ -244,23 +241,19 @@ class InvoiceController extends AppController {
     }
 
     public function delete($id) {
-        $invoice = $this->invoiceModel->find($id);
-        if (!$invoice || $invoice['user_id'] != $this->currentUserId()) {
-            return redirect()->to('/invoices')->with('error', 'Not found.');
-        }
+        $invoice = $this->getOwnedEntity($this->invoiceModel, $id, '/invoices');
+        if (!$invoice) return redirect()->to('/invoices');
         $this->invoiceItemModel->deleteByInvoice($id);
         $this->invoiceModel->delete($id);
         return redirect()->to('/invoices')->with('success', 'Invoice deleted!');
     }
 
     public function updateStatus($id) {
-        $invoice = $this->invoiceModel->find($id);
-        if (!$invoice || $invoice['user_id'] != $this->currentUserId()) {
-            return redirect()->to('/invoices')->with('error', 'Not found.');
-        }
+        $invoice = $this->getOwnedEntity($this->invoiceModel, $id, '/invoices');
+        if (!$invoice) return redirect()->to('/invoices');
         $status = $this->request->getPost('status');
         $this->invoiceModel->update($id, ['status' => $status]);
-        return redirect()->to('/invoices/' . $id)->with('success', 'Status updated to ' . ucfirst($status));
+        return redirect()->to('/invoices/' . $id)->with('success', lang('App.status_updated', [lang('App.' . $status)]));
     }
 
     public function togglePublic($id) {
@@ -284,6 +277,43 @@ class InvoiceController extends AppController {
             'appName'  => $settingModel->getSetting('app_name', 'InvoiceApp'),
             'appLogo'  => $settingModel->getSetting('app_logo', ''),
         ]);
+    }
+
+    public function sharePdf($token) {
+        @ini_set('memory_limit', '1024M');
+
+        $invoice = $this->invoiceModel->findByPublicToken($token);
+        if (!$invoice) {
+            return view('invoices/public_error', ['title' => lang('App.invoice_not_found')]);
+        }
+
+        $items = $this->invoiceItemModel->getByInvoice($invoice['id']);
+        $settingModel = model('SettingModel');
+        $appName = $settingModel->getSetting('app_name', 'InvoiceApp');
+
+        $pdfLogoService = new \App\Services\PdfLogoService();
+        $logoDataUri = $pdfLogoService->buildDataUri($invoice['company_logo'] ?? '');
+
+        $html = view('invoices/pdf', [
+            'invoice'     => $invoice,
+            'items'       => $items,
+            'appName'     => $appName,
+            'logoDataUri' => $logoDataUri,
+            'isPublic'    => true,
+        ]);
+
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isRemoteEnabled', false);
+        $options->set('defaultFont', 'sans-serif');
+
+        $dompdf = new Dompdf($options);
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+
+        $filename = $invoice['invoice_number'] . '.pdf';
+        return $dompdf->stream($filename, ['Attachment' => true]);
     }
 
     private function invoicePayload(?int $userId = null, ?string $invoiceNumber = null): array {

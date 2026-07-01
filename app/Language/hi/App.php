@@ -37,6 +37,7 @@ return [
     'paid'                  => 'भुगतान किया गया',
     'unpaid'                => 'अभुक्त',
     'cancelled'             => 'रद्द किया गया',
+    'status_updated'        => 'स्थिति {0} में बदली गई',
 
     // Invoice table headers
     'invoice_number_col'    => 'चालान #',
@@ -69,7 +70,7 @@ return [
     'invoice_title'         => 'चालान',
     'print_invoice'         => 'चालान प्रिंट करें',
     'back_to_invoice'       => 'चालान पर वापस जाएं',
-    'generated_by'          => 'InvoiceApp द्वारा जनरेट — ',
+    'generated_by'          => 'द्वारा जनरेट',
     'logo_alt'              => 'लोगो',
 
     // Invoice actions
@@ -85,6 +86,7 @@ return [
     'make_private'          => 'निजी करें',
     'copy_link'             => 'लिंक कॉपी करें',
     'link_copied'           => 'लिंक कॉपी किया गया!',
+    'copy_link_fallback'    => '',
     'public_invoice'        => 'सार्वजनिक चालान',
     'invoice_not_found'     => 'चालान नहीं मिला',
     'invoice_not_found_desc'=> 'यह चालान उपलब्ध नहीं है या इसे निजी बना दिया गया है।',
@@ -173,6 +175,7 @@ return [
     // ===== ACCOUNT =====
     'account'               => 'खाता',
     'role'                  => 'भूमिका',
+'role_admin'            => 'Admin',    'role_user'             => 'User',
     'total_invoices_created'=> 'कुल बनाए गए चालान',
     'company_limit'         => 'कंपनी निर्माण सीमा',
     'invoice_limit'         => 'चालान निर्माण सीमा',

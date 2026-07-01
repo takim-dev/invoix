@@ -17,6 +17,7 @@
     <div class="card">
         <div class="card-body p-4">
             <form action="/admin/auth-settings" method="POST">
+<?= csrf_field() ?>
                 <div class="mb-3">
                     <label class="form-label">Enable Registration</label>
                     <div class="form-check form-switch">

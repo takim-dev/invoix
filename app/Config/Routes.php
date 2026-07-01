@@ -57,6 +57,7 @@ $routes->post('/invoices/(:num)/update', 'InvoiceController::update/$1');
 $routes->post('/invoices/(:num)/delete', 'InvoiceController::delete/$1');
 $routes->post('/invoices/(:num)/status', 'InvoiceController::updateStatus/$1');
 $routes->post('/invoices/(:num)/toggle-public', 'InvoiceController::togglePublic/$1');
+$routes->get('/share/(:any)/pdf', 'InvoiceController::sharePdf/$1');
 $routes->get('/share/(:any)', 'InvoiceController::share/$1');
 
 // Admin

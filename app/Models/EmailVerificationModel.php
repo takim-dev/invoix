@@ -13,13 +13,18 @@ class EmailVerificationModel extends Model
     protected $useTimestamps = false;
     protected $allowedFields = ['user_id', 'token', 'expires_at', 'verified_at', 'created_at'];
 
+    private function hashToken(string $token): string
+    {
+        return hash('sha256', $token);
+    }
+
     public function createToken(int $userId, string $token): bool
     {
         $expiresAt = date('Y-m-d H:i:s', strtotime('+24 hours'));
 
         return (bool) $this->insert([
             'user_id' => $userId,
-            'token' => $token,
+            'token' => $this->hashToken($token),
             'expires_at' => $expiresAt,
             'verified_at' => null,
             'created_at' => date('Y-m-d H:i:s'),
@@ -28,12 +33,12 @@ class EmailVerificationModel extends Model
 
     public function getByToken(string $token): ?array
     {
-        return $this->where('token', $token)->first();
+        return $this->where('token', $this->hashToken($token))->first();
     }
 
     public function verifyToken(string $token): bool
     {
-        return (bool) $this->where('token', $token)->update(null, [
+        return (bool) $this->where('token', $this->hashToken($token))->update(null, [
             'verified_at' => date('Y-m-d H:i:s'),
         ]);
     }

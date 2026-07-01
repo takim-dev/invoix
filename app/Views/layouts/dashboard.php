@@ -53,7 +53,7 @@
                             <td><a href="/invoices/<?= $inv['id'] ?>" class="text-decoration-none" style="color:#6c5ce7"><?= esc($inv['invoice_number']) ?></a></td>
                             <td><?= esc($inv['client_name']) ?></td>
                             <td><?= format_currency($inv['total'], $inv['currency'] ?? 'USD') ?></td>
-                            <td><span class="badge badge-<?= $inv['status'] ?>"><?= ucfirst($inv['status']) ?></span></td>
+                            <td><span class="badge badge-<?= $inv['status'] ?>"><?= esc(lang('App.' . $inv['status'])) ?></span></td>
                             <td><?= date('d M Y', strtotime($inv['invoice_date'])) ?></td>
                         </tr>
                     <?php endforeach; ?>

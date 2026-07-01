@@ -12,6 +12,7 @@
     <div class="card">
         <div class="card-body">
             <form action="/admin/user/<?= $target['id'] ?>/update" method="POST">
+<?= csrf_field() ?>
                 <div class="mb-3">
                     <label class="form-label">Name</label>
                     <input type="text" name="name" class="form-control" required value="<?= esc($target['name']) ?>">

@@ -17,6 +17,7 @@
     <div class="card">
         <div class="card-body p-4">
             <form action="<?= site_url('admin/settings') ?>" method="POST" enctype="multipart/form-data">
+<?= csrf_field() ?>
                 <div class="mb-3">
                     <label class="form-label">App Name</label>
                     <input type="text" name="app_name" class="form-control" value="<?= esc($settings['app_name'] ?? 'InvoiceApp') ?>" placeholder="InvoiceApp">

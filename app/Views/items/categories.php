@@ -13,6 +13,7 @@
         <div class="card-header"><i class="bi bi-plus-circle me-1"></i> <?= esc(lang('App.add_category')) ?></div>
         <div class="card-body">
             <form action="/items/categories/store" method="POST" class="d-flex gap-2">
+<?= csrf_field() ?>
                 <input type="text" name="name" class="form-control" required placeholder="<?= lang('App.category_name_ph') ?>">
                 <button type="submit" class="btn btn-primary"><i class="bi bi-plus-lg"></i></button>
             </form>

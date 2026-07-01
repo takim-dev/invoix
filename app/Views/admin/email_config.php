@@ -17,6 +17,7 @@
     <div class="card">
         <div class="card-body p-4">
             <form action="/admin/email-config" method="POST">
+<?= csrf_field() ?>
                 <div class="mb-3">
                     <label class="form-label">Protocol</label>
                     <select name="protocol" class="form-select">

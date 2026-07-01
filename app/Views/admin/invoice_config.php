@@ -18,6 +18,7 @@
             <div class="card-header">Default User Limits</div>
             <div class="card-body p-4">
                 <form action="/admin/invoice-config" method="POST">
+<?= csrf_field() ?>
                     <div class="mb-3">
                         <label class="form-label">Default Companies Limit</label>
                         <input type="number" name="default_max_companies" class="form-control" min="0" step="1" required value="<?= esc($settings['default_max_companies'] ?? '3') ?>">

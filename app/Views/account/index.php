@@ -192,7 +192,7 @@
             <div class="account-meta">
                 <div class="account-meta-row">
                     <span><?= lang('App.role') ?></span>
-                    <strong><?= esc(ucfirst($account['role'])) ?></strong>
+                    <strong><?= esc(lang('App.role_' . $account['role'])) ?></strong>
                 </div>
                 <div class="account-meta-row">
                     <span><?= lang('App.total_invoices_created') ?></span>
@@ -214,6 +214,7 @@
         <div class="card-header"><?= lang('App.language_label') ?></div>
         <div class="card-body">
             <form action="<?= site_url('account/language') ?>" method="POST">
+<?= csrf_field() ?>
                 <div class="mb-3">
                     <label class="form-label" for="language"><?= lang('App.language_label') ?></label>
                     <select id="language" name="language" class="form-select">
