@@ -189,6 +189,12 @@
                 debugContent.textContent = data.debug;
                 debugBox.classList.remove('d-none');
             }
+            // Refresh CSRF tokens on all forms after AJAX — token regenerates on every POST.
+            if (data.csrfToken && data.csrfHash) {
+                document.querySelectorAll('input[name="' + data.csrfToken + '"]').forEach(function (el) {
+                    el.value = data.csrfHash;
+                });
+            }
         })
         .catch(() => showResult('An unexpected error occurred while sending the test email.', 'danger'))
         .finally(() => {

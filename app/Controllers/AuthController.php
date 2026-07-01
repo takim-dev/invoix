@@ -128,7 +128,7 @@ class AuthController extends AppController {
         $appName = $this->settingModel->getSetting('app_name', 'InvoiceApp');
         $verificationUrl = site_url('/verify-email/' . $token);
 
-        return $emailService->send(
+        return $emailService->sendSimple(
             $email,
             'Verify Your Email - ' . $appName,
             view('email/verify_email', [

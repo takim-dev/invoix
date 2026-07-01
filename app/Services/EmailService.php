@@ -15,15 +15,15 @@ class EmailService
 
     /**
      * Send an email using the app's configured SMTP settings.
-     * Returns true on success, false on failure.
+     * Returns [success, debugOutput].
      */
-    public function send(string $to, string $subject, string $body, ?string $toName = null): bool
+    public function send(string $to, string $subject, string $body, ?string $toName = null): array
     {
         $emailConfig = json_decode($this->settingModel->getSetting('email_config', '{}'), true);
 
         if (empty($emailConfig['host'])) {
             log_message('error', 'EmailService: SMTP host not configured.');
-            return false;
+            return [false, 'SMTP host is not configured.'];
         }
 
         $appName = $this->settingModel->getSetting('app_name', 'InvoiceApp');
@@ -39,12 +39,22 @@ class EmailService
         $emailService->setMessage($body);
 
         $sent = $emailService->send();
+        $debug = $emailService->printDebugger();
 
         if (!$sent) {
-            log_message('error', 'EmailService: Failed to send to ' . $to);
+            log_message('error', 'EmailService: Failed to send to ' . $to . "\n" . strip_tags($debug));
         }
 
-        return (bool) $sent;
+        return [(bool) $sent, $debug];
+    }
+
+    /**
+     * Compatibility wrapper: returns bool only.
+     */
+    public function sendSimple(string $to, string $subject, string $body, ?string $toName = null): bool
+    {
+        [$success] = $this->send($to, $subject, $body, $toName);
+        return $success;
     }
 
     /**
@@ -65,18 +75,31 @@ class EmailService
             $mailType = 'html';
         }
 
+        $encryption = strtolower($config['encryption'] ?? 'tls');
+        $newline = $config['newline'] ?? "\r\n";
+
         return [
-            'SMTPHost'  => $config['host'] ?? '',
-            'SMTPPort'  => (int) ($config['port'] ?? 587),
-            'SMTPUser'  => $config['user'] ?? '',
-            'SMTPPass'  => $config['pass'] ?? '',
-            'SMTPCrypto'=> strtolower($config['encryption'] ?? 'tls'),
-            'SMTPTimeout' => 10,
-            'protocol'  => 'smtp',
-            'mailType'  => $mailType,
-            'charset'   => $config['charset'] ?? 'UTF-8',
-            'wordWrap'  => true,
-            'wrapChars' => 76,
+            'SMTPHost'    => $config['host'] ?? '',
+            'SMTPPort'    => (int) ($config['port'] ?? 587),
+            'SMTPUser'    => $config['user'] ?? '',
+            'SMTPPass'    => $config['pass'] ?? '',
+            'SMTPCrypto'  => $encryption === 'none' ? '' : $encryption,
+            'SMTPTimeout' => 30,
+            'SMTPAuth'    => true,
+            'protocol'    => 'smtp',
+            'mailType'    => $mailType,
+            'charset'     => $config['charset'] ?? 'UTF-8',
+            'wordWrap'    => true,
+            'wrapChars'   => 76,
+            'newline'     => $newline,
+            'CRLF'        => $newline,
+            'SMTPOptions' => [
+                'ssl' => [
+                    'verify_peer'       => false,
+                    'verify_peer_name'  => false,
+                    'allow_self_signed' => true,
+                ],
+            ],
         ];
     }
 }

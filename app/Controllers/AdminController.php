@@ -272,9 +272,11 @@ class AdminController extends AppController {
             return $this->response->setJSON(['success' => false, 'message' => 'Invalid request method.']);
         }
 
+        $csrfRefresh = ['csrfToken' => csrf_token(), 'csrfHash' => csrf_hash()];
+
         $testEmail = trim((string) $this->request->getPost('test_email'));
         if (!filter_var($testEmail, FILTER_VALIDATE_EMAIL)) {
-            return $this->response->setJSON(['success' => false, 'message' => 'Please enter a valid recipient email address.']);
+            return $this->response->setJSON(['success' => false, 'message' => 'Please enter a valid recipient email address.'] + $csrfRefresh);
         }
 
         $settingModel = model('SettingModel');
@@ -284,10 +286,10 @@ class AdminController extends AppController {
         $config = $emailService->getConfig();
 
         if (empty($config['host'])) {
-            return $this->response->setJSON(['success' => false, 'message' => 'SMTP host is not configured. Please save your SMTP settings first.']);
+            return $this->response->setJSON(['success' => false, 'message' => 'SMTP host is not configured. Please save your SMTP settings first.'] + $csrfRefresh);
         }
 
-        $sent = $emailService->send(
+        [$sent, $debug] = $emailService->send(
             $testEmail,
             'Test Email from ' . $appName,
             view('email/test_email', [
@@ -302,7 +304,8 @@ class AdminController extends AppController {
             'message' => $sent
                 ? 'Test email sent successfully to ' . $testEmail . '. Please check the inbox (and spam folder).'
                 : 'Failed to send test email. Please check your SMTP configuration.',
-        ]);
+            'debug'   => $debug,
+        ] + $csrfRefresh);
     }
 
     private function handleAppLogoUpload() {
