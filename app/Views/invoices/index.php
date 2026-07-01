@@ -243,6 +243,9 @@
     <div class="topbar">
         <h2><i class="bi bi-file-earmark-text me-2" style="color:#6571ff"></i>Invoices</h2>
         <div class="d-flex flex-wrap gap-2">
+            <a href="/help" class="btn btn-outline-secondary" target="_blank">
+                <i class="bi bi-question-circle me-1"></i> Help
+            </a>
             <a href="<?= site_url('invoices/export') . '?' . http_build_query($filters ?? []) ?>" class="btn btn-outline-secondary">
                 <i class="bi bi-file-earmark-spreadsheet me-1"></i> Download Excel
             </a>

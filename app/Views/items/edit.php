@@ -39,7 +39,7 @@
                     <div class="col-md-4 mb-3">
                         <label class="form-label">Currency</label>
                         <select name="currency" class="form-select">
-                            <?php foreach (['USD','IDR','SGD','JPY','CNY','MYR'] as $c): ?>
+                            <?php foreach (['USD','IDR','MYR','CNY','INR','EUR','SAR','VND'] as $c): ?>
                                 <option value="<?= $c ?>" <?= ($item['currency'] ?? 'USD') === $c ? 'selected' : '' ?>><?= $c ?></option>
                             <?php endforeach; ?>
                         </select>

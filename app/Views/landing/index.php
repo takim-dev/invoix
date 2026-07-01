@@ -4,12 +4,14 @@
 <?= $this->section('styles') ?>
 <style>
     :root {
-        --brand: #6571ff;
-        --brand-dark: #4f5bd5;
-        --brand-soft: rgba(101, 113, 255, 0.10);
-        --ink: #0f172a;
-        --muted: #64748b;
-        --bg-soft: #f8fafc;
+        --brand: #1b3a5c;
+        --brand-dark: #0f2539;
+        --brand-soft: rgba(27, 58, 92, 0.08);
+        --brand-gold: #c9a84c;
+        --brand-gold-light: #e4c76b;
+        --ink: #0a1628;
+        --muted: #5a6f85;
+        --bg-soft: #f0f4f8;
     }
 
     /* ===== HERO ===== */
@@ -23,7 +25,7 @@
         position: absolute;
         top: -120px; right: -120px;
         width: 460px; height: 460px;
-        background: radial-gradient(circle, rgba(101, 113, 255, 0.20), transparent 70%);
+        background: radial-gradient(circle, rgba(27, 58, 92, 0.18), transparent 70%);
         border-radius: 50%;
         pointer-events: none;
     }
@@ -32,7 +34,7 @@
         position: absolute;
         bottom: -160px; left: -120px;
         width: 380px; height: 380px;
-        background: radial-gradient(circle, rgba(139, 92, 246, 0.18), transparent 70%);
+        background: radial-gradient(circle, rgba(201, 168, 76, 0.16), transparent 70%);
         border-radius: 50%;
         pointer-events: none;
     }
@@ -55,7 +57,7 @@
         margin-bottom: 1.2rem;
     }
     .hero h1 .accent {
-        background: linear-gradient(135deg, var(--brand) 0%, #8b5cf6 100%);
+        background: linear-gradient(135deg, var(--brand) 0%, var(--brand-gold) 100%);
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
@@ -91,7 +93,7 @@
     .invoice-preview .ip-brand { display: flex; align-items: center; gap: 0.5rem; font-weight: 700; }
     .invoice-preview .ip-logo {
         width: 30px; height: 30px;
-        background: linear-gradient(135deg, var(--brand) 0%, #8b5cf6 100%);
+        background: linear-gradient(135deg, var(--brand) 0%, var(--brand-gold) 100%);
         border-radius: 7px;
     }
     .invoice-preview h6.ip-title { color: var(--brand); font-weight: 700; margin: 0; font-size: 1.1rem; }
@@ -145,7 +147,7 @@
     .feature-card:hover {
         transform: translateY(-4px);
         border-color: var(--brand);
-        box-shadow: 0 18px 40px -20px rgba(101, 113, 255, 0.30);
+        box-shadow: 0 18px 40px -20px rgba(27, 58, 92, 0.30);
     }
     .feature-icon {
         width: 44px; height: 44px;
@@ -170,25 +172,25 @@
         display: inline-flex; align-items: center; justify-content: center;
         font-weight: 800;
         font-size: 1.1rem;
-        box-shadow: 0 8px 20px -6px rgba(101, 113, 255, 0.45);
+        box-shadow: 0 8px 20px -6px rgba(27, 58, 92, 0.40);
     }
     .step-card h6 { font-weight: 700; margin-bottom: 0.3rem; }
     .step-card p { color: var(--muted); font-size: 0.9rem; margin: 0; }
 
     /* ===== CTA BANNER ===== */
     .cta-banner {
-        background: linear-gradient(135deg, var(--brand) 0%, #8b5cf6 100%);
+        background: linear-gradient(135deg, var(--brand) 0%, var(--brand-gold) 100%);
         border-radius: 20px;
         padding: 3rem 2rem;
         color: #fff;
         text-align: center;
-        box-shadow: 0 30px 60px -20px rgba(101, 113, 255, 0.45);
+        box-shadow: 0 30px 60px -20px rgba(27, 58, 92, 0.40);
     }
     .cta-banner h2 { font-weight: 800; margin-bottom: 0.6rem; font-size: clamp(1.6rem, 3vw, 2.2rem); }
     .cta-banner p { opacity: 0.9; margin-bottom: 1.5rem; font-size: 1.05rem; }
     .cta-banner .btn { font-size: 1.05rem; padding: 0.7rem 2rem; border-radius: 10px; font-weight: 600; }
     .btn-white { background: #fff; color: var(--brand); border-color: #fff; }
-    .btn-white:hover { background: #f1f5ff; color: var(--brand-dark); border-color: #f1f5ff; }
+    .btn-white:hover { background: #e8f0f8; color: var(--brand-dark); border-color: #e8f0f8; }
 
     @media (max-width: 991px) {
         .hero { padding: 2rem 0 2.5rem; }

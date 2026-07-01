@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
 
 <div class="topbar">
-    <h2><i class="bi bi-plus-circle me-2" style="color:#a78bfa"></i>Create Invoice</h2>
+    <h2><i class="bi bi-plus-circle me-2" style="color:#c9a84c"></i>Create Invoice</h2>
     <a href="/invoices" class="btn btn-outline-secondary btn-sm"><i class="bi bi-arrow-left me-1"></i> Back</a>
 </div>
 
@@ -120,10 +120,12 @@
                     <select name="currency" class="form-select" id="currencySelect" onchange="updateCurrencySymbol()">
                         <option value="USD">USD - US Dollar</option>
                         <option value="IDR">IDR - Indonesian Rupiah</option>
-                        <option value="SGD">SGD - Singapore Dollar</option>
-                        <option value="JPY">JPY - Japanese Yen</option>
-                        <option value="CNY">CNY - Chinese Yuan</option>
                         <option value="MYR">MYR - Malaysian Ringgit</option>
+                        <option value="CNY">CNY - Chinese Yuan</option>
+                        <option value="INR">INR - Indian Rupee</option>
+                        <option value="EUR">EUR - Euro</option>
+                        <option value="SAR">SAR - Saudi Riyal</option>
+                        <option value="VND">VND - Vietnamese Dong</option>
                     </select>
                 </div>
                 <div class="mb-3">
@@ -134,7 +136,7 @@
                 <div class="d-flex justify-content-between mb-2"><span class="text-muted">Subtotal</span><span id="subtotal">$0.00</span></div>
                 <div class="d-flex justify-content-between mb-2"><span class="text-muted">Tax</span><span id="taxAmt">$0.00</span></div>
                 <hr>
-                <div class="d-flex justify-content-between"><strong>Total</strong><strong id="grandTotal" style="color:#a78bfa;font-size:1.3rem;">$0.00</strong></div>
+                <div class="d-flex justify-content-between"><strong>Total</strong><strong id="grandTotal" style="color:#c9a84c;font-size:1.3rem;">$0.00</strong></div>
             </div>
         </div>
         <button type="submit" class="btn btn-primary w-100"><i class="bi bi-check-lg me-1"></i> Create Invoice</button>
@@ -191,7 +193,7 @@ function calcRow(el) {
 
 function updateCurrencySymbol() {
     const select = document.getElementById('currencySelect');
-    const symbols = {'USD':'$','IDR':'Rp','SGD':'S$','JPY':'¥','CNY':'¥','MYR':'RM'};
+    const symbols = {'USD':'$','IDR':'Rp','MYR':'RM','CNY':'¥','INR':'₹','EUR':'€','SAR':'﷼','VND':'₫'};
     window.currencySymbol = symbols[select.value] || '$';
     filterItemOptions();
     updateTotals();

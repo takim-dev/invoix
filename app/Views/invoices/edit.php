@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
 
 <div class="topbar">
-    <h2><i class="bi bi-pencil me-2" style="color:#a78bfa"></i>Edit Invoice</h2>
+    <h2><i class="bi bi-pencil me-2" style="color:#c9a84c"></i>Edit Invoice</h2>
     <a href="/invoices/<?= $invoice['id'] ?>" class="btn btn-outline-secondary btn-sm"><i class="bi bi-arrow-left me-1"></i> Back</a>
 </div>
 
@@ -121,10 +121,12 @@
                     <select name="currency" class="form-select" id="currencySelect" onchange="updateCurrencySymbol()">
                         <option value="USD" <?= ($invoice['currency'] ?? 'USD')==='USD'?'selected':'' ?>>USD - US Dollar</option>
                         <option value="IDR" <?= ($invoice['currency'] ?? '')==='IDR'?'selected':'' ?>>IDR - Indonesian Rupiah</option>
-                        <option value="SGD" <?= ($invoice['currency'] ?? '')==='SGD'?'selected':'' ?>>SGD - Singapore Dollar</option>
-                        <option value="JPY" <?= ($invoice['currency'] ?? '')==='JPY'?'selected':'' ?>>JPY - Japanese Yen</option>
-                        <option value="CNY" <?= ($invoice['currency'] ?? '')==='CNY'?'selected':'' ?>>CNY - Chinese Yuan</option>
                         <option value="MYR" <?= ($invoice['currency'] ?? '')==='MYR'?'selected':'' ?>>MYR - Malaysian Ringgit</option>
+                        <option value="CNY" <?= ($invoice['currency'] ?? '')==='CNY'?'selected':'' ?>>CNY - Chinese Yuan</option>
+                        <option value="INR" <?= ($invoice['currency'] ?? '')==='INR'?'selected':'' ?>>INR - Indian Rupee</option>
+                        <option value="EUR" <?= ($invoice['currency'] ?? '')==='EUR'?'selected':'' ?>>EUR - Euro</option>
+                        <option value="SAR" <?= ($invoice['currency'] ?? '')==='SAR'?'selected':'' ?>>SAR - Saudi Riyal</option>
+                        <option value="VND" <?= ($invoice['currency'] ?? '')==='VND'?'selected':'' ?>>VND - Vietnamese Dong</option>
                     </select>
                 </div>
                 <div class="mb-3">
@@ -135,7 +137,7 @@
                 <div class="d-flex justify-content-between mb-2"><span class="text-muted">Subtotal</span><span id="subtotal">$<?= number_format($invoice['subtotal'], 2) ?></span></div>
                 <div class="d-flex justify-content-between mb-2"><span class="text-muted">Tax</span><span id="taxAmt">$<?= number_format($invoice['tax_amount'], 2) ?></span></div>
                 <hr>
-                <div class="d-flex justify-content-between"><strong>Total</strong><strong id="grandTotal" style="color:#a78bfa;font-size:1.3rem;">$<?= number_format($invoice['total'], 2) ?></strong></div>
+                <div class="d-flex justify-content-between"><strong>Total</strong><strong id="grandTotal" style="color:#c9a84c;font-size:1.3rem;">$<?= number_format($invoice['total'], 2) ?></strong></div>
             </div>
         </div>
         <button type="submit" class="btn btn-primary w-100"><i class="bi bi-check-lg me-1"></i> Update Invoice</button>
@@ -190,7 +192,7 @@ function calcRow(el) {
 
 function updateCurrencySymbol() {
     const select = document.getElementById('currencySelect');
-    const symbols = {'USD':'$','IDR':'Rp','SGD':'S$','JPY':'¥','CNY':'¥','MYR':'RM'};
+    const symbols = {'USD':'$','IDR':'Rp','MYR':'RM','CNY':'¥','INR':'₹','EUR':'€','SAR':'﷼','VND':'₫'};
     window.currencySymbol = symbols[select.value] || '$';
     filterItemOptions();
     updateTotals();

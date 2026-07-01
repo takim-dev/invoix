@@ -16,6 +16,17 @@ class PageController extends AppController {
         ]);
     }
 
+    public function help() {
+        $settingModel = model('SettingModel');
+        return view('pages/help', [
+            'appName'    => $settingModel->getSetting('app_name', 'InvoiceApp'),
+            'appLogo'    => $settingModel->getSetting('app_logo', ''),
+            'isLoggedIn' => (bool) session()->get('user_id'),
+            'userName'   => session()->get('user_name'),
+            'title'      => 'Cara Membuat Invoice',
+        ]);
+    }
+
     public function contact() {
         $settingModel = model('SettingModel');
         return view('pages/contact', [

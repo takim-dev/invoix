@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
 
 <div class="topbar">
-    <h2><i class="bi bi-file-earmark-text me-2" style="color:#6c5ce7"></i><?= esc($invoice['invoice_number']) ?></h2>
+    <h2><i class="bi bi-file-earmark-text me-2" style="color:#c9a84c"></i><?= esc($invoice['invoice_number']) ?></h2>
     <div>
         <a href="/invoices/<?= $invoice['id'] ?>/print" target="_blank" class="btn btn-info btn-sm me-1"><i class="bi bi-printer me-1"></i> Print</a>
         <a href="/invoices/<?= $invoice['id'] ?>/pdf" class="btn btn-success btn-sm me-1"><i class="bi bi-file-earmark-pdf me-1"></i> PDF</a>
@@ -19,7 +19,7 @@
     <div class="card-body">
         <div class="row">
             <div class="col-md-6">
-                <h4 style="color:#6c5ce7;margin-bottom:1.5rem;">
+                <h4 style="color:#c9a84c;margin-bottom:1.5rem;">
                     <?php if ($invoice['company_logo']): ?>
                         <img src="/uploads/logos/<?= $invoice['company_logo'] ?>" alt="" style="height:40px;vertical-align:middle;margin-right:8px;background:#fff;padding:3px;border-radius:6px;">
                     <?php endif; ?>
@@ -77,7 +77,7 @@
             <div class="d-flex justify-content-between mb-2"><span class="text-muted">Subtotal</span><span><?= format_currency($invoice['subtotal'], $invoice['currency'] ?? 'USD') ?></span></div>
             <div class="d-flex justify-content-between mb-2"><span class="text-muted">Tax (<?= $invoice['tax_rate'] ?>%)</span><span><?= format_currency($invoice['tax_amount'], $invoice['currency'] ?? 'USD') ?></span></div>
             <hr>
-            <div class="d-flex justify-content-between"><strong>Total</strong><strong style="color:#6c5ce7;font-size:1.3rem;"><?= format_currency($invoice['total'], $invoice['currency'] ?? 'USD') ?></strong></div>
+            <div class="d-flex justify-content-between"><strong>Total</strong><strong style="color:#c9a84c;font-size:1.3rem;"><?= format_currency($invoice['total'], $invoice['currency'] ?? 'USD') ?></strong></div>
         </div>
     </div>
 </div>

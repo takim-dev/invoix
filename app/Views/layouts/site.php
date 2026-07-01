@@ -41,12 +41,14 @@
 
     <style>
         :root {
-            --brand: #6571ff;
-            --brand-dark: #4f5bd5;
-            --brand-soft: rgba(101, 113, 255, 0.10);
-            --ink: #0f172a;
-            --muted: #64748b;
-            --bg-soft: #f8fafc;
+            --brand: #1b3a5c;
+            --brand-dark: #0f2539;
+            --brand-soft: rgba(27, 58, 92, 0.08);
+            --brand-gold: #c9a84c;
+            --brand-gold-light: #e4c76b;
+            --ink: #0a1628;
+            --muted: #5a6f85;
+            --bg-soft: #f0f4f8;
         }
         * { box-sizing: border-box; }
         body {
@@ -55,7 +57,7 @@
             background: var(--bs-body-bg);
             margin: 0;
         }
-        [data-bs-theme="dark"] body { background: #0b1020; }
+        [data-bs-theme="dark"] body { background: #060d18; }
 
         .landing-nav { padding: 1rem 0; background: transparent; }
         .brand {
@@ -65,11 +67,11 @@
         }
         .brand-mark {
             width: 34px; height: 34px;
-            background: linear-gradient(135deg, var(--brand) 0%, #8b5cf6 100%);
+            background: linear-gradient(135deg, var(--brand) 0%, var(--brand-gold) 100%);
             border-radius: 9px;
             display: inline-flex; align-items: center; justify-content: center;
             color: #fff; font-size: 1rem;
-            box-shadow: 0 6px 16px rgba(101, 113, 255, 0.35);
+            box-shadow: 0 6px 16px rgba(27, 58, 92, 0.35);
             flex: 0 0 auto; overflow: hidden;
         }
         .brand-mark svg { width: 20px; height: 20px; }

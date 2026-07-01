@@ -5,7 +5,7 @@
 <style>
     .page-hero {
         padding: 3rem 0 2rem;
-        background: linear-gradient(135deg, var(--brand-soft) 0%, rgba(139, 92, 246, 0.08) 100%);
+        background: linear-gradient(135deg, var(--brand-soft) 0%, rgba(201, 168, 76, 0.08) 100%);
         border-bottom: 1px solid var(--bs-border-color);
     }
     .page-hero h1 {
@@ -13,7 +13,7 @@
         font-weight: 800;
         letter-spacing: -0.02em;
         margin: 0;
-        background: linear-gradient(135deg, var(--brand) 0%, #8b5cf6 100%);
+        background: linear-gradient(135deg, var(--brand) 0%, var(--brand-gold) 100%);
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;

@@ -3,10 +3,12 @@ function currency_symbol($code) {
     $symbols = [
         'USD' => '$',
         'IDR' => 'Rp',
-        'SGD' => 'S$',
-        'JPY' => '¥',
-        'CNY' => '¥',
         'MYR' => 'RM',
+        'CNY' => '¥',
+        'INR' => '₹',
+        'EUR' => '€',
+        'SAR' => '﷼',
+        'VND' => '₫',
     ];
     return $symbols[$code] ?? '$';
 }

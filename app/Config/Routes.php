@@ -5,6 +5,7 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'LandingController::index');
 $routes->get('/about', 'PageController::about');
 $routes->get('/contact', 'PageController::contact');
+$routes->get('/help', 'PageController::help');
 $routes->get('/language/(:segment)', 'LanguageController::switch/$1');
 $routes->get('/dashboard', 'DashboardController::index');
 

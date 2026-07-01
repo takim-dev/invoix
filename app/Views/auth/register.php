@@ -14,15 +14,16 @@
         :root {
             --bg: #f4f7fb;
             --panel: #ffffff;
-            --ink: #172033;
-            --muted: #6b7280;
+            --ink: #0a1628;
+            --muted: #5a6f85;
             --line: #e5e7eb;
-            --primary: #6571ff;
-            --primary-dark: #4f5bd5;
-            --primary-soft: #eef0ff;
+            --primary: #1b3a5c;
+            --primary-dark: #0f2539;
+            --primary-soft: rgba(27, 58, 92, 0.08);
+            --primary-gold: #c9a84c;
             --danger-bg: #fff1f1;
             --danger: #b42318;
-            --shadow: 0 18px 48px rgba(21, 33, 66, 0.12);
+            --shadow: 0 18px 48px rgba(10, 22, 40, 0.14);
         }
 
         * {
@@ -35,8 +36,8 @@
             font-family: Inter, "Segoe UI", Arial, sans-serif;
             color: var(--ink);
             background:
-                radial-gradient(circle at 16% 18%, rgba(101, 113, 255, 0.16), transparent 28%),
-                linear-gradient(135deg, #f8fafc 0%, #eef2f7 100%);
+                radial-gradient(circle at 16% 18%, rgba(27, 58, 92, 0.12), transparent 28%),
+                linear-gradient(135deg, #f0f4f8 0%, #e8ecf2 100%);
         }
 
         a {
@@ -76,8 +77,8 @@
             flex-direction: column;
             justify-content: space-between;
             background:
-                linear-gradient(145deg, rgba(29, 37, 71, 0.94), rgba(72, 82, 190, 0.9)),
-                linear-gradient(135deg, #1f2937, #6571ff);
+                linear-gradient(145deg, rgba(10, 22, 40, 0.96), rgba(27, 58, 92, 0.92)),
+                linear-gradient(135deg, #0f2539, #1b3a5c);
         }
 
         .auth-aside::before,
@@ -265,7 +266,7 @@
 
         input:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(101, 113, 255, 0.14);
+            box-shadow: 0 0 0 4px rgba(27, 58, 92, 0.12);
             background: #fff;
         }
 
@@ -290,14 +291,14 @@
             font: inherit;
             font-weight: 800;
             cursor: pointer;
-            box-shadow: 0 14px 24px rgba(101, 113, 255, 0.28);
+            box-shadow: 0 14px 24px rgba(27, 58, 92, 0.25);
             transition: transform 160ms ease, background 160ms ease, box-shadow 160ms ease;
         }
 
         .btn-primary:hover {
             background: var(--primary-dark);
             transform: translateY(-1px);
-            box-shadow: 0 16px 28px rgba(101, 113, 255, 0.32);
+            box-shadow: 0 16px 28px rgba(27, 58, 92, 0.30);
         }
 
         .btn-primary svg {
