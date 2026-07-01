@@ -14,8 +14,10 @@ A professional invoice management application built with CodeIgniter 4. Create, 
 - **Company logo upload** — PNG/JPG/WEBP with auto-downscaling (max 2MB, 1000px longest edge).
 - **Internationalization** — 9 languages: English, Bahasa Indonesia, Bahasa Malaysia, Chinese, Vietnamese, Arabic, Spanish, French, Hindi.
 - **Email verification** — Token-based verification with configurable method (none / email / admin approval).
+- **Forgot / Reset password** — Secure email-based password reset with SHA-256 hashed tokens, 1-hour expiry, and enumeration protection.
 - **Admin panel** — User management, app settings, invoice config, auth settings, email/SMTP config, page content.
 - **Per-user limits** — Configurable max companies and max invoices per user.
+- **Dark / Light theme** — User-toggleable theme persisted to localStorage, defaults to light.
 - **Security** — CSRF protection, per-user data ownership, admin approval flow, bcrypt password hashing.
 
 ## Internationalization
@@ -72,7 +74,7 @@ encryption.key = <generate-a-random-32-char-string>
 
 ### 3. Create the Database Schema
 
-The app requires 8 core tables. Run this SQL on your database before running migrations:
+The app requires 9 core tables. Run this SQL on your database before running migrations:
 
 ```sql
 CREATE TABLE users (
@@ -175,6 +177,15 @@ CREATE TABLE email_verifications (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
+
+CREATE TABLE password_resets (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    token VARCHAR(255) NOT NULL,
+    expires_at DATETIME NOT NULL,
+    created_at DATETIME NOT NULL,
+    INDEX (token)
+);
 ```
 
 ### 4. Run Migrations
@@ -183,12 +194,14 @@ CREATE TABLE email_verifications (
 php spark migrate
 ```
 
-This applies 5 additive migrations:
+This applies 7 additive migrations:
 - `add_email_verification_and_config` — email verification system
 - `add_currency_to_items` — currency column on items
 - `add_user_company_codes` — user and company short codes
 - `make_company_code_globally_unique` — prevents invoice number prefix collisions
 - `add_user_language` — per-user language preference
+- `add_public_share_to_invoices` — public invoice sharing via tokenized URLs
+- `AddPasswordResets` — password reset token storage
 
 ### 5. Create Admin User
 
@@ -258,13 +271,14 @@ invoice-app/
 │   ├── Config/          # Routes, Filters, Validation, Security, App
 │   ├── Controllers/     # 13 controllers (Auth, Admin, Invoice, etc.)
 │   ├── Database/
-│   │   ├── Migrations/  # 5 additive migrations
+│   │   ├── Migrations/  # 7 additive migrations
 │   │   └── Seeds/       # (empty — no built-in seeders)
 │   ├── Filters/         # AuthFilter, LocaleFilter
 │   ├── Helpers/         # currency_helper, format_helper
 │   ├── Language/        # 9 locale directories × 7 files each
-│   ├── Models/          # 8 models (User, Company, Invoice, etc.)
-│   └── Views/           # 40+ views (layouts, invoices, items, companies, etc.)
+│   ├── Models/          # 9 models (User, Company, Invoice, etc.)
+│   ├── Services/        # EmailService
+│   └── Views/           # 45+ views (layouts, invoices, items, companies, auth, email, etc.)
 ├── public/
 │   └── uploads/logos/   # Company logo uploads
 ├── writable/            # Logs, cache, session files
@@ -306,6 +320,9 @@ invoice-app/
 | GET/POST | `/admin` | Admin dashboard |
 | GET/POST | `/admin/users` | User management |
 | GET/POST | `/admin/settings` | App settings |
+| GET/POST | `/forgot-password` | Forgot password form |
+| POST | `/forgot-password` | Send reset link email |
+| GET/POST | `/reset-password/{token}` | Reset password form |
 | GET | `/about` | About page |
 | GET | `/contact` | Contact page |
 | GET | `/help` | Help page |
