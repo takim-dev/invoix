@@ -37,7 +37,7 @@ class AuthFilter implements FilterInterface {
         }
 
         // Allow public routes with dynamic segments (e.g. verify-email/{token})
-        $publicPrefixes = ['verify-email'];
+        $publicPrefixes = ['verify-email', 'share'];
         foreach ($publicPrefixes as $prefix) {
             if ($path === $prefix || str_starts_with($path, $prefix . '/') || str_starts_with($path, 'index.php/' . $prefix . '/')) {
                 return;

@@ -78,6 +78,17 @@ return [
     'pdf_btn'               => 'PDF',
     'delete_btn'            => 'Xóa',
 
+    // Share invoice
+    'share'                 => 'Chia sẻ',
+    'share_invoice'         => 'Chia sẻ Hóa đơn',
+    'make_public'           => 'Đặt Công khai',
+    'make_private'          => 'Đặt Riêng tư',
+    'copy_link'             => 'Sao chép Liên kết',
+    'link_copied'           => 'Đã sao chép liên kết!',
+    'public_invoice'        => 'Hóa đơn Công khai',
+    'invoice_not_found'     => 'Không tìm thấy Hóa đơn',
+    'invoice_not_found_desc'=> 'Hóa đơn này không khả dụng hoặc đã được đặt riêng tư.',
+
     // ===== ITEMS =====
     'items'                 => 'Mặt hàng',
     'add_item'              => 'Thêm mặt hàng',

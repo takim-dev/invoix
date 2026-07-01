@@ -7,6 +7,14 @@
     <div>
         <a href="/invoices/<?= $invoice['id'] ?>/print" target="_blank" class="btn btn-info btn-sm me-1"><i class="bi bi-printer me-1"></i> <?= esc(lang('App.print_btn')) ?></a>
         <a href="/invoices/<?= $invoice['id'] ?>/pdf" class="btn btn-success btn-sm me-1"><i class="bi bi-file-earmark-pdf me-1"></i> <?= esc(lang('App.pdf_btn')) ?></a>
+        <button id="shareToggleBtn" class="btn btn-sm me-1" data-id="<?= $invoice['id'] ?>" data-public="<?= $invoice['is_public'] ?? 0 ?>">
+            <i class="bi bi-share me-1"></i> <?= esc(lang('App.share')) ?>
+        </button>
+        <span id="shareCopyGroup" style="display:<?= ($invoice['is_public'] ?? 0) ? 'inline-block' : 'none' ?>;">
+            <button id="copyLinkBtn" class="btn btn-outline-secondary btn-sm me-1" title="<?= esc(lang('App.copy_link')) ?>">
+                <i class="bi bi-clipboard me-1"></i> <?= esc(lang('App.copy_link')) ?>
+            </button>
+        </span>
         <a href="/invoices/<?= $invoice['id'] ?>/edit" class="btn btn-warning btn-sm me-1"><i class="bi bi-pencil me-1"></i> <?= esc(lang('App.edit')) ?></a>
         <form action="/invoices/<?= $invoice['id'] ?>/delete" method="POST" class="d-inline" data-confirm="<?= esc(lang('App.delete_invoice_confirm')) ?>">
             <button class="btn btn-danger btn-sm"><i class="bi bi-trash me-1"></i> <?= esc(lang('App.delete_btn')) ?></button>
@@ -102,4 +110,58 @@
     </form>
 </div>
 
+<?= $this->endSection() ?>
+
+<?= $this->section('scripts') ?>
+<script>
+document.getElementById('shareToggleBtn').addEventListener('click', function() {
+    const btn = this;
+    const id = btn.dataset.id;
+    btn.disabled = true;
+    fetch('/invoices/' + id + '/toggle-public', {
+        method: 'POST',
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
+        }
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (data.error) { alert(data.error); return; }
+        btn.dataset.public = data.is_public ? '1' : '0';
+        btn.className = data.is_public ? 'btn btn-primary btn-sm me-1' : 'btn btn-outline-primary btn-sm me-1';
+        document.getElementById('shareCopyGroup').style.display = data.is_public ? 'inline-block' : 'none';
+        if (data.is_public) {
+            document.getElementById('copyLinkBtn').dataset.url = data.url;
+        }
+    })
+    .finally(() => { btn.disabled = false; });
+});
+
+document.getElementById('copyLinkBtn').addEventListener('click', function() {
+    const url = this.dataset.url || '';
+    if (!url) return;
+    navigator.clipboard.writeText(url).then(() => {
+        const orig = this.innerHTML;
+        this.innerHTML = '<i class="bi bi-check-lg me-1"></i> <?= esc(lang('App.link_copied')) ?>';
+        this.classList.add('btn-success');
+        this.classList.remove('btn-outline-secondary');
+        setTimeout(() => {
+            this.innerHTML = orig;
+            this.classList.remove('btn-success');
+            this.classList.add('btn-outline-secondary');
+        }, 2000);
+    });
+});
+
+// Set initial state
+(function() {
+    const btn = document.getElementById('shareToggleBtn');
+    const isPublic = btn.dataset.public === '1';
+    btn.className = isPublic ? 'btn btn-primary btn-sm me-1' : 'btn btn-outline-primary btn-sm me-1';
+    <?php if ($invoice['is_public'] ?? 0): ?>
+    document.getElementById('copyLinkBtn').dataset.url = '<?= site_url('share/' . ($invoice['public_token'] ?? '')) ?>';
+    <?php endif; ?>
+})();
+</script>
 <?= $this->endSection() ?>

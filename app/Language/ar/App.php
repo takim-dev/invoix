@@ -78,6 +78,17 @@ return [
     'pdf_btn'               => 'PDF',
     'delete_btn'            => 'حذف',
 
+    // Share invoice
+    'share'                 => 'مشاركة',
+    'share_invoice'         => 'مشاركة الفاتورة',
+    'make_public'           => 'جعلها عامة',
+    'make_private'          => 'جعلها خاصة',
+    'copy_link'             => 'نسخ الرابط',
+    'link_copied'           => 'تم نسخ الرابط!',
+    'public_invoice'        => 'فاتورة عامة',
+    'invoice_not_found'     => 'الفاتورة غير موجودة',
+    'invoice_not_found_desc'=> 'هذه الفاتورة غير متاحة أو تم جعلها خاصة.',
+
     // ===== ITEMS =====
     'items'                 => 'العناصر',
     'add_item'              => 'إضافة عنصر',

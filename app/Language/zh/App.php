@@ -78,6 +78,17 @@ return [
     'pdf_btn'               => 'PDF',
     'delete_btn'            => '删除',
 
+    // Share invoice
+    'share'                 => '分享',
+    'share_invoice'         => '分享发票',
+    'make_public'           => '设为公开',
+    'make_private'          => '设为私密',
+    'copy_link'             => '复制链接',
+    'link_copied'           => '链接已复制！',
+    'public_invoice'        => '公开发票',
+    'invoice_not_found'     => '未找到发票',
+    'invoice_not_found_desc'=> '此发票不可用或已被设为私密。',
+
     // ===== ITEMS =====
     'items'                 => '项目',
     'add_item'              => '添加项目',

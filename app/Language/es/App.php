@@ -78,6 +78,17 @@ return [
     'pdf_btn'               => 'PDF',
     'delete_btn'            => 'Eliminar',
 
+    // Share invoice
+    'share'                 => 'Compartir',
+    'share_invoice'         => 'Compartir Factura',
+    'make_public'           => 'Hacer Pública',
+    'make_private'          => 'Hacer Privada',
+    'copy_link'             => 'Copiar Enlace',
+    'link_copied'           => '¡Enlace copiado!',
+    'public_invoice'        => 'Factura Pública',
+    'invoice_not_found'     => 'Factura No Encontrada',
+    'invoice_not_found_desc'=> 'Esta factura no está disponible o se ha hecho privada.',
+
     // ===== ARTÍCULOS =====
     'items'                 => 'Artículos',
     'add_item'              => 'Agregar Artículo',

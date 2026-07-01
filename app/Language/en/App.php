@@ -78,6 +78,17 @@ return [
     'pdf_btn'               => 'PDF',
     'delete_btn'            => 'Delete',
 
+    // Share invoice
+    'share'                 => 'Share',
+    'share_invoice'         => 'Share Invoice',
+    'make_public'           => 'Make Public',
+    'make_private'          => 'Make Private',
+    'copy_link'             => 'Copy Link',
+    'link_copied'           => 'Link copied!',
+    'public_invoice'        => 'Public Invoice',
+    'invoice_not_found'     => 'Invoice Not Found',
+    'invoice_not_found_desc'=> 'This invoice is not available or has been made private.',
+
     // ===== ITEMS =====
     'items'                 => 'Items',
     'add_item'              => 'Add Item',

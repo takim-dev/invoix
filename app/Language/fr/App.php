@@ -78,6 +78,17 @@ return [
     'pdf_btn'               => 'PDF',
     'delete_btn'            => 'Supprimer',
 
+    // Share invoice
+    'share'                 => 'Partager',
+    'share_invoice'         => 'Partager la Facture',
+    'make_public'           => 'Rendre Publique',
+    'make_private'          => 'Rendre Privée',
+    'copy_link'             => 'Copier le Lien',
+    'link_copied'           => 'Lien copié !',
+    'public_invoice'        => 'Facture Publique',
+    'invoice_not_found'     => 'Facture Introuvable',
+    'invoice_not_found_desc'=> 'Cette facture n\'est pas disponible ou a été rendue privée.',
+
     // ===== ITEMS =====
     'items'                 => 'Articles',
     'add_item'              => 'Ajouter un Article',

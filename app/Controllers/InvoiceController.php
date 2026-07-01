@@ -263,6 +263,29 @@ class InvoiceController extends AppController {
         return redirect()->to('/invoices/' . $id)->with('success', 'Status updated to ' . ucfirst($status));
     }
 
+    public function togglePublic($id) {
+        $result = $this->invoiceModel->togglePublic((int) $id, $this->currentUserId());
+        if ($result === null) {
+            return $this->response->setJSON(['error' => 'Not found.'], 404);
+        }
+        return $this->response->setJSON($result);
+    }
+
+    public function share($token) {
+        $invoice = $this->invoiceModel->findByPublicToken($token);
+        if (!$invoice) {
+            return view('invoices/public_error', ['title' => lang('App.invoice_not_found')]);
+        }
+        $items = $this->invoiceItemModel->getByInvoice($invoice['id']);
+        $settingModel = model('SettingModel');
+        return view('invoices/public', [
+            'invoice'  => $invoice,
+            'items'    => $items,
+            'appName'  => $settingModel->getSetting('app_name', 'InvoiceApp'),
+            'appLogo'  => $settingModel->getSetting('app_logo', ''),
+        ]);
+    }
+
     private function invoicePayload(?int $userId = null, ?string $invoiceNumber = null): array {
         return [
             'user_id'        => $userId ?? $this->currentUserId(),

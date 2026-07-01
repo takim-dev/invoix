@@ -78,6 +78,17 @@ return [
     'pdf_btn'               => 'PDF',
     'delete_btn'            => 'Hapus',
 
+    // Share invoice
+    'share'                 => 'Bagikan',
+    'share_invoice'         => 'Bagikan Faktur',
+    'make_public'           => 'Jadikan Publik',
+    'make_private'          => 'Jadikan Pribadi',
+    'copy_link'             => 'Salin Tautan',
+    'link_copied'           => 'Tautan disalin!',
+    'public_invoice'        => 'Faktur Publik',
+    'invoice_not_found'     => 'Faktur Tidak Ditemukan',
+    'invoice_not_found_desc'=> 'Faktur ini tidak tersedia atau telah dijadikan pribadi.',
+
     // ===== ITEMS =====
     'items'                 => 'Item',
     'add_item'              => 'Tambah Item',

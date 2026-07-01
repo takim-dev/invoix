@@ -78,6 +78,17 @@ return [
     'pdf_btn'               => 'PDF',
     'delete_btn'            => 'Padam',
 
+    // Share invoice
+    'share'                 => 'Kongsi',
+    'share_invoice'         => 'Kongsi Invois',
+    'make_public'           => 'Jadikan Awam',
+    'make_private'          => 'Jadikan Peribadi',
+    'copy_link'             => 'Salin Pautan',
+    'link_copied'           => 'Pautan disalin!',
+    'public_invoice'        => 'Invois Awam',
+    'invoice_not_found'     => 'Invois Tidak Ditemui',
+    'invoice_not_found_desc'=> 'Invois ini tidak tersedia atau telah dijadikan peribadi.',
+
     // ===== ITEMS =====
     'items'                 => 'Item',
     'add_item'              => 'Tambah Item',

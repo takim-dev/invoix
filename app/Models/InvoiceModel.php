@@ -8,7 +8,7 @@ class InvoiceModel extends Model {
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
     protected $useTimestamps = true;
-    protected $allowedFields = ['user_id','company_id','invoice_number','client_name','client_email','client_address','invoice_date','due_date','notes','status','currency','subtotal','tax_rate','tax_amount','total'];
+    protected $allowedFields = ['user_id','company_id','invoice_number','client_name','client_email','client_address','invoice_date','due_date','notes','status','is_public','public_token','currency','subtotal','tax_rate','tax_amount','total'];
 
     public function getByUser($userId) {
         return $this->select('invoices.*, companies.name as company_name')
@@ -102,6 +102,28 @@ class InvoiceModel extends Model {
         $seq = str_pad((string) ($count + 1), 4, '0', STR_PAD_LEFT);
 
         return 'INV-' . $userCode . '-' . $companyCode . '-' . $year . '-' . $seq;
+    }
+
+    public function togglePublic($invoiceId, $userId) {
+        $invoice = $this->where('id', $invoiceId)->where('user_id', $userId)->first();
+        if (!$invoice) return null;
+
+        if ($invoice['is_public']) {
+            $this->update($invoiceId, ['is_public' => 0, 'public_token' => null]);
+            return ['is_public' => false, 'url' => null];
+        }
+
+        $token = bin2hex(random_bytes(32));
+        $this->update($invoiceId, ['is_public' => 1, 'public_token' => $token]);
+        return ['is_public' => true, 'url' => site_url('share/' . $token)];
+    }
+
+    public function findByPublicToken($token) {
+        return $this->select('invoices.*, companies.name as company_name, companies.address as company_address, companies.phone as company_phone, companies.email as company_email, companies.tax_number as company_tax_number, companies.logo as company_logo')
+            ->join('companies', 'companies.id = invoices.company_id', 'left')
+            ->where('invoices.public_token', $token)
+            ->where('invoices.is_public', 1)
+            ->first();
     }
 
     public function calculateTotals($invoiceId) {

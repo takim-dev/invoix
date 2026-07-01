@@ -78,6 +78,17 @@ return [
     'pdf_btn'               => 'PDF',
     'delete_btn'            => 'हटाएं',
 
+    // Share invoice
+    'share'                 => 'साझा करें',
+    'share_invoice'         => 'चालान साझा करें',
+    'make_public'           => 'सार्वजनिक करें',
+    'make_private'          => 'निजी करें',
+    'copy_link'             => 'लिंक कॉपी करें',
+    'link_copied'           => 'लिंक कॉपी किया गया!',
+    'public_invoice'        => 'सार्वजनिक चालान',
+    'invoice_not_found'     => 'चालान नहीं मिला',
+    'invoice_not_found_desc'=> 'यह चालान उपलब्ध नहीं है या इसे निजी बना दिया गया है।',
+
     // ===== ITEMS =====
     'items'                 => 'आइटम',
     'add_item'              => 'आइटम जोड़ें',
