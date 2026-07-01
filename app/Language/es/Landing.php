@@ -37,6 +37,10 @@ return [
     'step2_d'           => 'Agrega artículos reutilizables con categoría, unidad y precios por moneda. Úsalos después en segundos.',
     'step3_t'           => 'Crea y envía',
     'step3_d'           => 'Compón una factura, mira los totales en vivo y descarga un PDF profesional o imprime al instante.',
+    'stat_companies' => 'Empresas',
+    'stat_invoices'  => 'Facturas Creadas',
+    'stat_users'     => 'Usuarios',
+
     'cta_banner_title_guest' => '¿Listo para enviar tu primera factura?',
     'cta_banner_desc_guest'  => 'Cuenta gratis. Sin tarjeta. Configuración en minutos.',
     'cta_banner_title_user'  => 'Continúa donde lo dejaste.',

@@ -192,10 +192,58 @@
     .btn-white { background: #fff; color: var(--brand); border-color: #fff; }
     .btn-white:hover { background: #e8f0f8; color: var(--brand-dark); border-color: #e8f0f8; }
 
+    /* ===== STATS COUNTER ===== */
+    .stats-section {
+        padding: 0 0 3rem;
+        position: relative;
+    }
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+    .stat-counter {
+        text-align: center;
+        padding: 2rem 1.5rem;
+        background: var(--bs-body-bg);
+        border: 1px solid var(--bs-border-color);
+        border-radius: 16px;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .stat-counter:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 18px 40px -16px rgba(27, 58, 92, 0.25);
+    }
+    .stat-counter .stat-number {
+        font-size: 2.8rem;
+        font-weight: 900;
+        line-height: 1;
+        background: linear-gradient(135deg, var(--brand) 0%, var(--brand-gold) 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        margin-bottom: 0.4rem;
+    }
+    .stat-counter .stat-label {
+        color: var(--muted);
+        font-size: 0.95rem;
+        font-weight: 500;
+    }
+    .stat-counter .stat-icon {
+        width: 48px; height: 48px;
+        margin: 0 auto 0.8rem;
+        border-radius: 12px;
+        background: var(--brand-soft);
+        color: var(--brand);
+        display: inline-flex; align-items: center; justify-content: center;
+        font-size: 1.4rem;
+    }
+
     @media (max-width: 991px) {
         .hero { padding: 2rem 0 2.5rem; }
         .invoice-preview { margin-top: 2rem; transform: none; }
         .hero::before, .hero::after { display: none; }
+        .stats-grid { grid-template-columns: 1fr; }
     }
 </style>
 <?= $this->endSection() ?>
@@ -299,6 +347,29 @@
         </div>
     </div>
 </header>
+
+<!-- ===== STATS COUNTER ===== -->
+<section class="stats-section">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-counter">
+                <span class="stat-icon"><i class="bi bi-building"></i></span>
+                <div class="stat-number"><?= number_format($totalCompanies ?? 0) ?></div>
+                <div class="stat-label"><?= esc(lang('Landing.stat_companies')) ?></div>
+            </div>
+            <div class="stat-counter">
+                <span class="stat-icon"><i class="bi bi-file-earmark-text"></i></span>
+                <div class="stat-number"><?= number_format($totalInvoices ?? 0) ?></div>
+                <div class="stat-label"><?= esc(lang('Landing.stat_invoices')) ?></div>
+            </div>
+            <div class="stat-counter">
+                <span class="stat-icon"><i class="bi bi-people"></i></span>
+                <div class="stat-number"><?= number_format($totalUsers ?? 0) ?></div>
+                <div class="stat-label"><?= esc(lang('Landing.stat_users')) ?></div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <!-- ===== FEATURES ===== -->
 <section class="section" id="features">

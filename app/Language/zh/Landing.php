@@ -40,6 +40,10 @@ return [
     'step3_t'        => '创建并发送',
     'step3_d'        => '编写发票，实时查看金额更新，然后下载精美的 PDF 或立即打印。',
 
+    'stat_companies' => '公司',
+    'stat_invoices'  => '已开发票',
+    'stat_users'     => '用户',
+
     'cta_banner_title_guest'  => '准备好发送您的第一张发票了吗？',
     'cta_banner_desc_guest'   => '免费账户。无需信用卡。几分钟即可完成设置。',
     'cta_banner_title_user'   => '从上次离开的地方继续。',

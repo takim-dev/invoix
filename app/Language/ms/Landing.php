@@ -40,6 +40,10 @@ return [
     'step3_t'        => 'Cipta & hantar',
     'step3_d'        => 'Susun invois, lihat jumlah dikemas kini secara langsung, kemudian muat turun PDF kemas atau cetak serta-merta.',
 
+    'stat_companies' => 'Syarikat',
+    'stat_invoices'  => 'Invois Dicipta',
+    'stat_users'     => 'Pengguna',
+
     'cta_banner_title_guest'  => 'Sedia menghantar invois pertama anda?',
     'cta_banner_desc_guest'   => 'Akaun percuma. Tanpa kad kredit. Sedia dalam beberapa minit.',
     'cta_banner_title_user'   => 'Sambung semula dari tempat anda berhenti.',

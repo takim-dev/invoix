@@ -40,6 +40,10 @@ return [
     'step3_t'        => 'Tạo và gửi',
     'step3_d'        => 'Soạn hóa đơn, xem tổng cập nhật trực tiếp, sau đó tải PDF tinh tế hoặc in ngay lập tức.',
 
+    'stat_companies' => 'Công Ty',
+    'stat_invoices'  => 'Hóa Đơn Đã Tạo',
+    'stat_users'     => 'Người Dùng',
+
     'cta_banner_title_guest'  => 'Sẵn sàng gửi hóa đơn đầu tiên?',
     'cta_banner_desc_guest'   => 'Tài khoản miễn phí. Không cần thẻ tín dụng. Thiết lập trong vài phút.',
     'cta_banner_title_user'   => 'Tiếp tục từ nơi bạn dừng lại.',

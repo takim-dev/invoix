@@ -40,6 +40,10 @@ return [
     'step3_t'        => 'Buat & kirim',
     'step3_d'        => 'Susun faktur, lihat total diperbarui langsung, lalu unduh PDF rapi atau cetak seketika.',
 
+    'stat_companies' => 'Perusahaan',
+    'stat_invoices'  => 'Faktur Dibuat',
+    'stat_users'     => 'Pengguna',
+
     'cta_banner_title_guest'  => 'Siap mengirim faktur pertama Anda?',
     'cta_banner_desc_guest'   => 'Akun gratis. Tanpa kartu kredit. Siap dalam hitungan menit.',
     'cta_banner_title_user'   => 'Lanjutkan dari yang terakhir.',

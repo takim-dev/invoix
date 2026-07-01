@@ -40,6 +40,10 @@ return [
     'step3_t'        => 'Create & send',
     'step3_d'        => 'Compose an invoice, watch totals update live, then download a polished PDF or print instantly.',
 
+    'stat_companies' => 'Companies',
+    'stat_invoices'  => 'Invoices Created',
+    'stat_users'     => 'Users',
+
     'cta_banner_title_guest'  => 'Ready to send your first invoice?',
     'cta_banner_desc_guest'   => 'Free account. No credit card. Set up in minutes.',
     'cta_banner_title_user'   => 'Pick up where you left off.',
