@@ -177,9 +177,10 @@
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
-                'X-Requested-With': 'XMLHttpRequest'
+                'X-Requested-With': 'XMLHttpRequest',
+                '<?= csrf_header() ?>': '<?= csrf_hash() ?>'
             },
-            body: 'test_email=' + encodeURIComponent(email)
+            body: 'test_email=' + encodeURIComponent(email) + '&<?= csrf_token() ?>=<?= csrf_hash() ?>'
         })
         .then(r => r.json())
         .then(data => {
