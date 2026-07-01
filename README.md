@@ -18,6 +18,16 @@ A professional invoice management application built with CodeIgniter 4. Create, 
 - **Per-user limits** — Configurable max companies and max invoices per user.
 - **Security** — CSRF protection, per-user data ownership, admin approval flow, bcrypt password hashing.
 
+## Internationalization
+
+9 supported locales: `en`, `id`, `ms`, `zh`, `vi`, `ar`, `es`, `fr`, `hi`.
+
+Users can switch language from:
+- The language dropdown in the navbar
+- Their account settings page (persists to database)
+
+The admin can set a default locale in App Settings.
+
 ## System Requirements
 
 - PHP 8.2 or higher
@@ -324,13 +334,5 @@ php spark make:filter          # Create a new filter
 
 User limits are set per-user via `max_companies` and `max_invoices`. Defaults for new registrations are configurable in the admin panel (Settings → Invoice Config). Admins can override limits per user.
 
-## Internationalization
 
-9 supported locales: `en`, `id`, `ms`, `zh`, `vi`, `ar`, `es`, `fr`, `hi`.
-
-Users can switch language from:
-- The language dropdown in the navbar
-- Their account settings page (persists to database)
-
-The admin can set a default locale in App Settings.
 
