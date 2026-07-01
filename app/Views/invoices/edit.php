@@ -1,10 +1,10 @@
 <?= $this->extend('layouts/app') ?>
-<?= $this->section('title') ?>Edit Invoice<?= $this->endSection() ?>
+<?= $this->section('title') ?><?= esc(lang('App.edit_invoice')) ?><?= $this->endSection() ?>
 <?= $this->section('content') ?>
 
 <div class="topbar">
-    <h2><i class="bi bi-pencil me-2" style="color:#c9a84c"></i>Edit Invoice</h2>
-    <a href="/invoices/<?= $invoice['id'] ?>" class="btn btn-outline-secondary btn-sm"><i class="bi bi-arrow-left me-1"></i> Back</a>
+    <h2><i class="bi bi-pencil me-2" style="color:#c9a84c"></i><?= esc(lang('App.edit_invoice')) ?></h2>
+    <a href="/invoices/<?= $invoice['id'] ?>" class="btn btn-outline-secondary btn-sm"><i class="bi bi-arrow-left me-1"></i> <?= esc(lang('App.back')) ?></a>
 </div>
 
 <form action="/invoices/<?= $invoice['id'] ?>/update" method="POST">
@@ -12,15 +12,15 @@
 <div class="row g-4">
     <div class="col-md-8">
         <div class="card mb-4">
-            <div class="card-header"><i class="bi bi-info-circle me-1"></i> Invoice Details</div>
+            <div class="card-header"><i class="bi bi-info-circle me-1"></i> <?= esc(lang('App.invoice_details')) ?></div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label class="form-label">Invoice Number</label>
+                        <label class="form-label"><?= esc(lang('App.invoice_number')) ?></label>
                         <input type="text" class="form-control" value="<?= esc($invoice['invoice_number']) ?>" readonly>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label class="form-label">Company *</label>
+                        <label class="form-label"><?= esc(lang('App.company_name')) ?> *</label>
                         <select name="company_id" class="form-select" required>
                             <?php foreach ($companies as $c): ?>
                                 <option value="<?= $c['id'] ?>" <?= $invoice['company_id'] == $c['id'] ? 'selected' : '' ?>><?= esc($c['name']) ?></option>
@@ -28,11 +28,11 @@
                         </select>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label class="form-label">Invoice Date *</label>
+                        <label class="form-label"><?= esc(lang('App.invoice_date')) ?> *</label>
                         <input type="date" name="invoice_date" class="form-control" value="<?= $invoice['invoice_date'] ?>" required>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label class="form-label">Due Date</label>
+                        <label class="form-label"><?= esc(lang('App.due_date')) ?></label>
                         <input type="date" name="due_date" class="form-control" value="<?= $invoice['due_date'] ?>">
                     </div>
                 </div>
@@ -40,19 +40,19 @@
         </div>
 
         <div class="card mb-4">
-            <div class="card-header"><i class="bi bi-person me-1"></i> Client Information</div>
+            <div class="card-header"><i class="bi bi-person me-1"></i> <?= esc(lang('App.client_info')) ?></div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label class="form-label">Client Name *</label>
+                        <label class="form-label"><?= esc(lang('App.client_name')) ?> *</label>
                         <input type="text" name="client_name" class="form-control" required value="<?= esc($invoice['client_name']) ?>">
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label class="form-label">Client Email</label>
+                        <label class="form-label"><?= esc(lang('App.client_email')) ?></label>
                         <input type="email" name="client_email" class="form-control" value="<?= esc($invoice['client_email']) ?>">
                     </div>
                     <div class="col-12 mb-3">
-                        <label class="form-label">Client Address</label>
+                        <label class="form-label"><?= esc(lang('App.client_address')) ?></label>
                         <textarea name="client_address" class="form-control" rows="2"><?= esc($invoice['client_address']) ?></textarea>
                     </div>
                 </div>
@@ -61,19 +61,19 @@
 
         <div class="card mb-4">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <span><i class="bi bi-list-check me-1"></i> Line Items</span>
-                <button type="button" class="btn btn-sm btn-primary" onclick="addRow()"><i class="bi bi-plus-lg me-1"></i> Add Row</button>
+                <span><i class="bi bi-list-check me-1"></i> <?= esc(lang('App.line_items')) ?></span>
+                <button type="button" class="btn btn-sm btn-primary" onclick="addRow()"><i class="bi bi-plus-lg me-1"></i> <?= esc(lang('App.add_row')) ?></button>
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive">
                     <table class="table mb-0" id="itemsTable">
                         <thead>
                             <tr>
-                                <th style="width:35%;">Description</th>
-                                <th style="width:20%;">Item</th>
-                                <th style="width:10%;">Qty</th>
-                                <th style="width:15%;">Price</th>
-                                <th style="width:15%;">Total</th>
+                                <th style="width:35%;"><?= esc(lang('App.description')) ?></th>
+                                <th style="width:20%;"><?= esc(lang('App.items')) ?></th>
+                                <th style="width:10%;"><?= esc(lang('App.table_qty')) ?></th>
+                                <th style="width:15%;"><?= esc(lang('App.table_price')) ?></th>
+                                <th style="width:15%;"><?= esc(lang('App.total')) ?></th>
                                 <th style="width:5%;"></th>
                             </tr>
                         </thead>
@@ -96,7 +96,7 @@
 
         <div class="card mb-4">
             <div class="card-body">
-                <label class="form-label">Notes</label>
+                <label class="form-label"><?= esc(lang('App.notes')) ?></label>
                 <textarea name="notes" class="form-control" rows="2"><?= esc($invoice['notes']) ?></textarea>
             </div>
         </div>
@@ -104,20 +104,20 @@
 
     <div class="col-md-4">
         <div class="card mb-4">
-            <div class="card-header"><i class="bi bi-calculator me-1"></i> Summary</div>
+            <div class="card-header"><i class="bi bi-calculator me-1"></i> <?= esc(lang('App.summary')) ?></div>
             <div class="card-body">
                 <div class="mb-3">
-                    <label class="form-label">Status</label>
+                    <label class="form-label"><?= esc(lang('App.status')) ?></label>
                     <select name="status" class="form-select">
-                        <option value="draft" <?= $invoice['status']==='draft'?'selected':'' ?>>Draft</option>
-                        <option value="sent" <?= $invoice['status']==='sent'?'selected':'' ?>>Sent</option>
-                        <option value="paid" <?= $invoice['status']==='paid'?'selected':'' ?>>Paid</option>
-                        <option value="unpaid" <?= $invoice['status']==='unpaid'?'selected':'' ?>>Unpaid</option>
-                        <option value="cancelled" <?= $invoice['status']==='cancelled'?'selected':'' ?>>Cancelled</option>
+                        <option value="draft" <?= $invoice['status']==='draft'?'selected':'' ?>><?= esc(lang('App.draft')) ?></option>
+                        <option value="sent" <?= $invoice['status']==='sent'?'selected':'' ?>><?= esc(lang('App.sent')) ?></option>
+                        <option value="paid" <?= $invoice['status']==='paid'?'selected':'' ?>><?= esc(lang('App.paid')) ?></option>
+                        <option value="unpaid" <?= $invoice['status']==='unpaid'?'selected':'' ?>><?= esc(lang('App.unpaid')) ?></option>
+                        <option value="cancelled" <?= $invoice['status']==='cancelled'?'selected':'' ?>><?= esc(lang('App.cancelled')) ?></option>
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Currency</label>
+                    <label class="form-label"><?= esc(lang('App.currency')) ?></label>
                     <select name="currency" class="form-select" id="currencySelect" onchange="updateCurrencySymbol()">
                         <option value="USD" <?= ($invoice['currency'] ?? 'USD')==='USD'?'selected':'' ?>>USD - US Dollar</option>
                         <option value="IDR" <?= ($invoice['currency'] ?? '')==='IDR'?'selected':'' ?>>IDR - Indonesian Rupiah</option>
@@ -130,17 +130,17 @@
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Tax Rate (%)</label>
+                    <label class="form-label"><?= esc(lang('App.tax_rate')) ?> (%)</label>
                     <input type="number" name="tax_rate" class="form-control" value="<?= $invoice['tax_rate'] ?>" step="0.01" min="0" max="100">
                 </div>
                 <hr>
-                <div class="d-flex justify-content-between mb-2"><span class="text-muted">Subtotal</span><span id="subtotal">$<?= number_format($invoice['subtotal'], 2) ?></span></div>
-                <div class="d-flex justify-content-between mb-2"><span class="text-muted">Tax</span><span id="taxAmt">$<?= number_format($invoice['tax_amount'], 2) ?></span></div>
+                <div class="d-flex justify-content-between mb-2"><span class="text-muted"><?= esc(lang('App.subtotal')) ?></span><span id="subtotal">$<?= number_format($invoice['subtotal'], 2) ?></span></div>
+                <div class="d-flex justify-content-between mb-2"><span class="text-muted"><?= esc(lang('App.tax')) ?></span><span id="taxAmt">$<?= number_format($invoice['tax_amount'], 2) ?></span></div>
                 <hr>
-                <div class="d-flex justify-content-between"><strong>Total</strong><strong id="grandTotal" style="color:#c9a84c;font-size:1.3rem;">$<?= number_format($invoice['total'], 2) ?></strong></div>
+                <div class="d-flex justify-content-between"><strong><?= esc(lang('App.total')) ?></strong><strong id="grandTotal" style="color:#c9a84c;font-size:1.3rem;">$<?= number_format($invoice['total'], 2) ?></strong></div>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary w-100"><i class="bi bi-check-lg me-1"></i> Update Invoice</button>
+        <button type="submit" class="btn btn-primary w-100"><i class="bi bi-check-lg me-1"></i> <?= esc(lang('App.update_invoice')) ?></button>
     </div>
 </div>
 </form>
@@ -154,7 +154,7 @@ const itemOptions = `<?php foreach ($allItems as $it): ?><option value="<?= $it[
 function addRow() {
     const tr = document.createElement('tr');
     tr.innerHTML = `
-        <td><input type="text" name="item_description[]" class="form-control form-control-sm" required placeholder="Service/Product"></td>
+        <td><input type="text" name="item_description[]" class="form-control form-control-sm" required placeholder="<?= esc(lang('App.service_product_ph')) ?>"></td>
         <td><select name="item_id[]" class="form-select form-select-sm" onchange="fillPrice(this)"><option value="">--</option>${itemOptions}</select></td>
         <td><input type="number" name="item_quantity[]" class="form-control form-control-sm" value="1" min="1" onchange="calcRow(this)"></td>
         <td><input type="number" name="item_price[]" class="form-control form-control-sm" value="0" step="0.01" onchange="calcRow(this)"></td>

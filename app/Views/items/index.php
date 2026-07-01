@@ -1,5 +1,5 @@
 <?= $this->extend('layouts/app') ?>
-<?= $this->section('title') ?>Items<?= $this->endSection() ?>
+<?= $this->section('title') ?><?= esc(lang('App.items')) ?><?= $this->endSection() ?>
 <?= $this->section('styles') ?>
 <style>
     .items-page .topbar {
@@ -57,10 +57,10 @@
 
 <div class="items-page">
 <div class="topbar">
-    <h2><i class="bi bi-box me-2" style="color:#6c5ce7"></i>Items</h2>
+    <h2><i class="bi bi-box me-2" style="color:#6c5ce7"></i><?= esc(lang('App.items')) ?></h2>
     <div>
-        <a href="/items/categories" class="btn btn-outline-secondary btn-sm"><i class="bi bi-tags me-1"></i> Categories</a>
-        <a href="/items/create" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i> Add Item</a>
+        <a href="/items/categories" class="btn btn-outline-secondary btn-sm"><i class="bi bi-tags me-1"></i> <?= esc(lang('App.categories_btn')) ?></a>
+        <a href="/items/create" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i> <?= esc(lang('App.add_item_btn')) ?></a>
     </div>
 </div>
 
@@ -70,12 +70,12 @@
             <table id="itemsTable" class="table table-hover dt-server items-table mb-0">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Category</th>
-                        <th>Price</th>
-                        <th>Unit</th>
-                        <th class="text-center">Actions</th>
+                        <th><?= esc(lang('App.table_num')) ?></th>
+                        <th><?= esc(lang('App.name_col')) ?></th>
+                        <th><?= esc(lang('App.category_col')) ?></th>
+                        <th><?= esc(lang('App.price_col')) ?></th>
+                        <th><?= esc(lang('App.unit_col')) ?></th>
+                        <th class="text-center"><?= esc(lang('App.actions_col')) ?></th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -102,12 +102,12 @@
             ],
             language: {
                 search: '',
-                searchPlaceholder: 'Search items...',
-                lengthMenu: 'Show _MENU_ per page',
-                info: 'Showing _START_ to _END_ of _TOTAL_',
-                emptyTable: 'No items found',
-                zeroRecords: 'No items match your search',
-                processing: 'Loading items...',
+                searchPlaceholder: '<?= lang('App.search_items') ?>',
+                lengthMenu: '<?= lang('App.pagination_show') ?>',
+                info: '<?= lang('App.pagination_info') ?>',
+                emptyTable: '<?= lang('App.no_items_found') ?>',
+                zeroRecords: '<?= lang('App.no_items_match') ?>',
+                processing: '<?= lang('App.loading_items') ?>',
                 paginate: { previous: '<i class="bi bi-chevron-left"></i>', next: '<i class="bi bi-chevron-right"></i>' }
             },
             dom: '<"dt-toolbar d-flex justify-content-between align-items-center mb-3"<"dt-length d-flex align-items-center gap-2"l><"dt-search"f>>rt<"dt-footer d-flex justify-content-between align-items-center mt-3"<"dt-info"i><"dt-pagination"p>>'

@@ -53,24 +53,24 @@
                     <table class="brand-row">
                         <tr>
                             <?php if (!empty($logoDataUri)): ?>
-                                <td class="logo-cell"><img src="<?= $logoDataUri ?>" alt="Logo" style="height:40px;"></td>
+                                <td class="logo-cell"><img src="<?= $logoDataUri ?>" alt="<?= esc(lang('App.logo_alt')) ?>" style="height:40px;"></td>
                             <?php endif; ?>
-                            <td><h2><?= esc($invoice['company_name'] ?? 'Company') ?></h2></td>
+                            <td><h2><?= esc($invoice['company_name'] ?? lang('App.company_col')) ?></h2></td>
                         </tr>
                     </table>
                     <div class="company-info">
                         <?php if ($invoice['company_address']): ?><p><?= nl2br(esc($invoice['company_address'])) ?></p><?php endif; ?>
                         <?php if ($invoice['company_phone']): ?><p><?= esc($invoice['company_phone']) ?></p><?php endif; ?>
                         <?php if ($invoice['company_email']): ?><p><?= esc($invoice['company_email']) ?></p><?php endif; ?>
-                        <?php if ($invoice['company_tax_number']): ?><p>NPWP: <?= esc($invoice['company_tax_number']) ?></p><?php endif; ?>
+                        <?php if ($invoice['company_tax_number']): ?><p><?= esc(lang('App.npwp_label')) ?>: <?= esc($invoice['company_tax_number']) ?></p><?php endif; ?>
                     </div>
                 </td>
                 <td class="invoice-title">
-                    <h1>INVOICE</h1>
+                    <h1><?= esc(lang('App.invoice_title')) ?></h1>
                     <div class="inv-number"><?= esc($invoice['invoice_number']) ?></div>
-                    <div class="inv-date">Date: <?= date('d M Y', strtotime($invoice['invoice_date'])) ?></div>
+                    <div class="inv-date"><?= esc(lang('App.invoice_date')) ?>: <?= date('d M Y', strtotime($invoice['invoice_date'])) ?></div>
                     <?php if ($invoice['due_date']): ?>
-                        <div class="inv-date">Due: <?= date('d M Y', strtotime($invoice['due_date'])) ?></div>
+                        <div class="inv-date"><?= esc(lang('App.due_date')) ?>: <?= date('d M Y', strtotime($invoice['due_date'])) ?></div>
                     <?php endif; ?>
                     <span class="status-badge status-<?= $invoice['status'] ?>"><?= ucfirst($invoice['status']) ?></span>
                 </td>
@@ -80,7 +80,7 @@
         <table class="parties">
             <tr>
                 <td style="width:50%;">
-                    <h4>Bill To</h4>
+                    <h4><?= esc(lang('App.bill_to')) ?></h4>
                     <p class="name"><?= esc($invoice['client_name']) ?></p>
                     <?php if ($invoice['client_email']): ?><p><?= esc($invoice['client_email']) ?></p><?php endif; ?>
                     <?php if ($invoice['client_address']): ?><p><?= nl2br(esc($invoice['client_address'])) ?></p><?php endif; ?>
@@ -91,11 +91,11 @@
         <table class="items">
             <thead>
                 <tr>
-                    <th style="width:5%;">#</th>
-                    <th style="width:50%;">Description</th>
-                    <th style="width:12%;">Qty</th>
-                    <th style="width:15%;">Unit Price</th>
-                    <th style="width:18%;">Total</th>
+                    <th style="width:5%;"><?= esc(lang('App.table_num')) ?></th>
+                    <th style="width:50%;"><?= esc(lang('App.description')) ?></th>
+                    <th style="width:12%;"><?= esc(lang('App.table_qty')) ?></th>
+                    <th style="width:15%;"><?= esc(lang('App.table_unit_price')) ?></th>
+                    <th style="width:18%;"><?= esc(lang('App.total')) ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -113,21 +113,21 @@
 
         <div class="totals-wrap">
             <table class="totals-box">
-                <tr><td class="label">Subtotal</td><td class="value"><?= format_currency($invoice['subtotal'], $invoice['currency'] ?? 'USD') ?></td></tr>
-                <tr><td class="label">Tax (<?= $invoice['tax_rate'] ?>%)</td><td class="value"><?= format_currency($invoice['tax_amount'], $invoice['currency'] ?? 'USD') ?></td></tr>
-                <tr class="total"><td>Total</td><td class="value"><?= format_currency($invoice['total'], $invoice['currency'] ?? 'USD') ?></td></tr>
+                <tr><td class="label"><?= esc(lang('App.subtotal')) ?></td><td class="value"><?= format_currency($invoice['subtotal'], $invoice['currency'] ?? 'USD') ?></td></tr>
+                <tr><td class="label"><?= esc(lang('App.tax')) ?> (<?= $invoice['tax_rate'] ?>%)</td><td class="value"><?= format_currency($invoice['tax_amount'], $invoice['currency'] ?? 'USD') ?></td></tr>
+                <tr class="total"><td><?= esc(lang('App.total')) ?></td><td class="value"><?= format_currency($invoice['total'], $invoice['currency'] ?? 'USD') ?></td></tr>
             </table>
         </div>
 
         <?php if ($invoice['notes']): ?>
         <div class="notes">
-            <h5>Notes</h5>
+            <h5><?= esc(lang('App.notes')) ?></h5>
             <p><?= nl2br(esc($invoice['notes'])) ?></p>
         </div>
         <?php endif; ?>
 
         <div class="footer">
-            Generated by InvoiceApp &mdash; <?= date('d M Y H:i') ?>
+            <?= esc(lang('App.generated_by')) ?><?= date('d M Y H:i') ?>
         </div>
     </div>
 </body>

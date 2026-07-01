@@ -1,5 +1,5 @@
 <?= $this->extend('layouts/site') ?>
-<?= $this->section('title') ?><?= esc($title) ?><?= $this->endSection() ?>
+<?= $this->section('title') ?><?= esc(lang('Help.title')) ?><?= $this->endSection() ?>
 
 <?= $this->section('styles') ?>
 <style>
@@ -105,7 +105,7 @@
 
 <header class="page-hero">
     <div class="container">
-        <h1><?= esc($title) ?></h1>
+        <h1><?= esc(lang('Help.title')) ?></h1>
     </div>
 </header>
 
@@ -113,75 +113,75 @@
     <div class="container">
         <div class="row g-5">
             <div class="col-lg-8">
-                <h3><i class="bi bi-list-ol"></i> Langkah-langkah Membuat Invoice</h3>
+                <h3><i class="bi bi-list-ol"></i> <?= esc(lang('Help.steps_heading')) ?></h3>
                 <ol class="step-list">
                     <li>
-                        <h5>Siapkan Data Perusahaan</h5>
-                        <p>Pastikan profil perusahaan sudah diisi lengkap di menu <strong>Companies</strong>. Data seperti nama, alamat, email, dan logo akan otomatis muncul di invoice.</p>
+                        <h5><?= esc(lang('Help.step1_t')) ?></h5>
+                        <p><?= lang('Help.step1_d') ?></p>
                     </li>
                     <li>
-                        <h5>Tambahkan Item / Produk</h5>
-                        <p>Buka menu <strong>Items</strong> dan tambahkan produk atau jasa yang ingin dijual. Isi nama, harga satuan, dan pilih mata uang (currency) yang sesuai.</p>
+                        <h5><?= esc(lang('Help.step2_t')) ?></h5>
+                        <p><?= lang('Help.step2_d') ?></p>
                     </li>
                     <li>
-                        <h5>Buka Halaman Create Invoice</h5>
-                        <p>Klik menu <strong>Invoices</strong> lalu tekan tombol <strong>New Invoice</strong>. Kamu akan diarahkan ke formulir pembuatan invoice.</p>
+                        <h5><?= esc(lang('Help.step3_t')) ?></h5>
+                        <p><?= lang('Help.step3_d') ?></p>
                     </li>
                     <li>
-                        <h5>Isi Detail Invoice</h5>
-                        <p>Pilih perusahaan, client, tanggal invoice, tanggal jatuh tempo (due date), currency, dan tax rate. Nomor invoice akan digenerate otomatis.</p>
+                        <h5><?= esc(lang('Help.step4_t')) ?></h5>
+                        <p><?= lang('Help.step4_d') ?></p>
                     </li>
                     <li>
-                        <h5>Pilih Item & Jumlah</h5>
-                        <p>Pilih item dari dropdown, isi quantity, dan harga akan terisi otomatis. Kamu bisa menambah beberapa baris item sekaligus dengan tombol <strong>+</strong>.</p>
+                        <h5><?= esc(lang('Help.step5_t')) ?></h5>
+                        <p><?= lang('Help.step5_d') ?></p>
                     </li>
                     <li>
-                        <h5>Simpan & Download</h5>
-                        <p>Setelah semua terisi, klik <strong>Save Invoice</strong>. Invoice akan tersimpan dan kamu bisa melihat preview, mengedit status, mendownload PDF, atau mencetaknya.</p>
+                        <h5><?= esc(lang('Help.step6_t')) ?></h5>
+                        <p><?= lang('Help.step6_d') ?></p>
                     </li>
                 </ol>
             </div>
 
             <div class="col-lg-4">
-                <h3><i class="bi bi-lightbulb"></i> Tips & Trik</h3>
+                <h3><i class="bi bi-lightbulb"></i> <?= esc(lang('Help.tips_heading')) ?></h3>
 
                 <div class="tip-card">
                     <span class="tip-icon"><i class="bi bi-currency-exchange"></i></span>
                     <div>
-                        <h6>Pilih Currency yang Tepat</h6>
-                        <p>Gunakan currency yang sesuai dengan client kamu. Tersedia USD, IDR, MYR, CNY, INR, EUR, SAR, dan VND.</p>
+                        <h6><?= esc(lang('Help.tip1_t')) ?></h6>
+                        <p><?= esc(lang('Help.tip1_d')) ?></p>
                     </div>
                 </div>
 
                 <div class="tip-card">
                     <span class="tip-icon"><i class="bi bi-hash"></i></span>
                     <div>
-                        <h6>Nomor Invoice Otomatis</h6>
-                        <p>Nomor invoice digenerate otomatis dengan format <code>INV-XXX-COMP-YYYY-NNNN</code>. Tidak perlu diisi manual.</p>
+                        <h6><?= esc(lang('Help.tip2_t')) ?></h6>
+                        <p><?= lang('Help.tip2_d') ?></p>
                     </div>
                 </div>
 
                 <div class="tip-card">
                     <span class="tip-icon"><i class="bi bi-file-earmark-pdf"></i></span>
                     <div>
-                        <h6>Export ke PDF</h6>
-                        <p>Setiap invoice bisa didownload sebagai file PDF siap kirim ke client dengan sekali klik.</p>
+                        <h6><?= esc(lang('Help.tip3_t')) ?></h6>
+                        <p><?= esc(lang('Help.tip3_d')) ?></p>
                     </div>
                 </div>
 
                 <div class="tip-card">
                     <span class="tip-icon"><i class="bi bi-arrow-repeat"></i></span>
                     <div>
-                        <h6>Update Status Invoice</h6>
-                        <p>Status invoice bisa diubah kapan saja: Draft → Sent → Paid → Cancelled. Pantau status dari halaman daftar invoice.</p>
+                        <h6><?= esc(lang('Help.tip4_t')) ?></h6>
+                        <p><?= esc(lang('Help.tip4_d')) ?></p>
                     </div>
                 </div>
 
                 <div class="tip-card">
                     <span class="tip-icon"><i class="bi bi-database"></i></span>
                     <div>
-                        <h6>Export Data ke Excel</h6>
-                        <p>Gunakan tombol <strong>Download Excel</strong> di halaman Invoices untuk mengekspor semua data invoice ke spreadsheet.</p>
+                        <h6><?= esc(lang('Help.tip5_t')) ?></h6>
+                        <p><?= esc(lang('Help.tip5_d')) ?></p>
                     </div>
                 </div>
             </div>

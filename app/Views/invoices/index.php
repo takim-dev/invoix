@@ -1,5 +1,5 @@
 <?= $this->extend('layouts/app') ?>
-<?= $this->section('title') ?>Invoices<?= $this->endSection() ?>
+<?= $this->section('title') ?><?= esc(lang('App.invoices')) ?><?= $this->endSection() ?>
 <?= $this->section('styles') ?>
 <style>
     .invoice-page .topbar {
@@ -241,15 +241,15 @@
 
 <div class="invoice-page">
     <div class="topbar">
-        <h2><i class="bi bi-file-earmark-text me-2" style="color:#6571ff"></i>Invoices</h2>
+        <h2><i class="bi bi-file-earmark-text me-2" style="color:#6571ff"></i><?= esc(lang('App.invoices')) ?></h2>
         <div class="d-flex flex-wrap gap-2">
             <a href="/help" class="btn btn-outline-secondary" target="_blank">
-                <i class="bi bi-question-circle me-1"></i> Help
+                <i class="bi bi-question-circle me-1"></i> <?= esc(lang('App.help')) ?>
             </a>
             <a href="<?= site_url('invoices/export') . '?' . http_build_query($filters ?? []) ?>" class="btn btn-outline-secondary">
-                <i class="bi bi-file-earmark-spreadsheet me-1"></i> Download Excel
+                <i class="bi bi-file-earmark-spreadsheet me-1"></i> <?= esc(lang('App.download_excel')) ?>
             </a>
-            <a href="/invoices/create" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i> New Invoice</a>
+            <a href="/invoices/create" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i> <?= esc(lang('App.new_invoice')) ?></a>
         </div>
     </div>
 
@@ -257,8 +257,8 @@
         <div class="card-body">
             <form method="GET" action="<?= site_url('invoices') ?>" class="invoice-filter-grid">
                 <div>
-                    <label class="form-label" for="client">Client</label>
-                    <input list="clientOptions" type="text" id="client" name="client" class="form-control" value="<?= esc($filters['client'] ?? '') ?>" placeholder="All clients">
+                    <label class="form-label" for="client"><?= esc(lang('App.client_col')) ?></label>
+                    <input list="clientOptions" type="text" id="client" name="client" class="form-control" value="<?= esc($filters['client'] ?? '') ?>" placeholder="<?= esc(lang('App.all_clients')) ?>">
                     <datalist id="clientOptions">
                         <?php foreach (($clientOptions ?? []) as $client): ?>
                             <option value="<?= esc($client['client_name']) ?>"></option>
@@ -267,9 +267,9 @@
                 </div>
 
                 <div>
-                    <label class="form-label" for="company_id">Company</label>
+                    <label class="form-label" for="company_id"><?= esc(lang('App.company_col')) ?></label>
                     <select id="company_id" name="company_id" class="form-select">
-                        <option value="">All companies</option>
+                        <option value=""><?= esc(lang('App.all_companies')) ?></option>
                         <?php foreach (($companies ?? []) as $company): ?>
                             <option value="<?= $company['id'] ?>" <?= (string)($filters['company_id'] ?? '') === (string)$company['id'] ? 'selected' : '' ?>>
                                 <?= esc($company['name']) ?>
@@ -279,20 +279,20 @@
                 </div>
 
                 <div>
-                    <label class="form-label" for="date_from">From</label>
+                    <label class="form-label" for="date_from"><?= esc(lang('App.from_date')) ?></label>
                     <input type="date" id="date_from" name="date_from" class="form-control" value="<?= esc($filters['date_from'] ?? '') ?>">
                 </div>
 
                 <div>
-                    <label class="form-label" for="date_to">To</label>
+                    <label class="form-label" for="date_to"><?= esc(lang('App.to_date')) ?></label>
                     <input type="date" id="date_to" name="date_to" class="form-control" value="<?= esc($filters['date_to'] ?? '') ?>">
                 </div>
 
                 <div class="invoice-filter-actions">
                     <button type="submit" class="btn btn-primary">
-                        <i class="bi bi-funnel me-1"></i> Filter
+                        <i class="bi bi-funnel me-1"></i> <?= esc(lang('App.filter')) ?>
                     </button>
-                    <a href="<?= site_url('invoices') ?>" class="btn btn-outline-secondary">Reset</a>
+                    <a href="<?= site_url('invoices') ?>" class="btn btn-outline-secondary"><?= esc(lang('App.reset')) ?></a>
                 </div>
             </form>
         </div>
@@ -304,13 +304,13 @@
                 <table id="invoicesTable" class="table table-hover dt-server invoice-table mb-0">
                     <thead>
                         <tr>
-                            <th>Invoice #</th>
-                            <th>Client</th>
-                            <th>Company</th>
-                            <th>Total</th>
-                            <th>Status</th>
-                            <th>Date</th>
-                            <th class="text-center">Actions</th>
+                            <th><?= esc(lang('App.invoice_number_col')) ?></th>
+                            <th><?= esc(lang('App.client_col')) ?></th>
+                            <th><?= esc(lang('App.company_col')) ?></th>
+                            <th><?= esc(lang('App.total_col')) ?></th>
+                            <th><?= esc(lang('App.status_col')) ?></th>
+                            <th><?= esc(lang('App.date_col')) ?></th>
+                            <th class="text-center"><?= esc(lang('App.actions_col')) ?></th>
                         </tr>
                     </thead>
                     <tbody></tbody>
@@ -344,12 +344,12 @@
             ],
             language: {
                 search: '',
-                searchPlaceholder: 'Search invoices...',
-                lengthMenu: 'Show _MENU_ per page',
-                info: 'Showing _START_ to _END_ of _TOTAL_',
-                emptyTable: 'No invoices found',
-                zeroRecords: 'No invoices match your filters',
-                processing: 'Loading invoices...',
+                searchPlaceholder: '<?= lang('App.search_invoices') ?>',
+                lengthMenu: '<?= lang('App.pagination_show') ?>',
+                info: '<?= lang('App.pagination_info') ?>',
+                emptyTable: '<?= lang('App.no_invoices_found') ?>',
+                zeroRecords: '<?= lang('App.no_invoices_match') ?>',
+                processing: '<?= lang('App.loading_invoices') ?>',
                 paginate: { previous: '<i class="bi bi-chevron-left"></i>', next: '<i class="bi bi-chevron-right"></i>' }
             },
             dom: '<"dt-toolbar d-flex justify-content-between align-items-center mb-3"<"dt-length d-flex align-items-center gap-2"l><"dt-search"f>>rt<"dt-footer d-flex justify-content-between align-items-center mt-3"<"dt-info"i><"dt-pagination"p>>'

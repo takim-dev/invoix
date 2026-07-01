@@ -409,7 +409,7 @@ $footerText = $settingModel->getSetting('footer_text', 'Powered by CodeIgniter 4
                     <?= view('partials/lang_switcher') ?>
                     <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
                         <i class="bi bi-sun" id="themeIcon"></i>
-                        <span id="themeLabel"><?= lang('Common.theme_light') ?></span>
+                        <span id="themeLabel"><?= lang('App.light_theme') ?></span>
                     </button>
                     <span style="font-size:0.85rem;">
                         <i class="bi bi-person-circle me-1"></i><?= esc(session()->get('user_name') ?? '') ?>
@@ -469,10 +469,10 @@ $footerText = $settingModel->getSetting('footer_text', 'Powered by CodeIgniter 4
                 searching: true,
                 language: {
                     search: '',
-                    searchPlaceholder: 'Search...',
-                    lengthMenu: 'Show _MENU_ per page',
-                    info: 'Showing _START_ to _END_ of _TOTAL_',
-                    emptyTable: 'No data available',
+                    searchPlaceholder: '<?= lang('App.search_placeholder') ?>',
+                    lengthMenu: '<?= lang('App.pagination_show') ?>',
+                    info: '<?= lang('App.pagination_info') ?>',
+                    emptyTable: '<?= lang('App.pagination_empty') ?>',
                     paginate: { previous: '<i class="bi bi-chevron-left"></i>', next: '<i class="bi bi-chevron-right"></i>' }
                 },
                 dom: '<"dt-toolbar d-flex justify-content-between align-items-center mb-3"<"dt-length d-flex align-items-center gap-2"l><"dt-search"f>>rt<"dt-footer d-flex justify-content-between align-items-center mt-3"<"dt-info"i><"dt-pagination"p>>'
@@ -482,16 +482,16 @@ $footerText = $settingModel->getSetting('footer_text', 'Powered by CodeIgniter 4
             $(document).on('submit', 'form[data-confirm]', function(e) {
                 e.preventDefault();
                 var form = this;
-                var message = form.getAttribute('data-confirm') || 'This action cannot be undone.';
+                var message = form.getAttribute('data-confirm') || '<?= lang('App.confirm_delete_text') ?>';
                 Swal.fire({
-                    title: 'Are you sure?',
+                    title: '<?= lang('App.confirm_delete_title') ?>',
                     text: message,
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#6366f1',
                     cancelButtonColor: '#6b7280',
-                    confirmButtonText: 'Yes, delete it!',
-                    cancelButtonText: 'Cancel'
+                    confirmButtonText: '<?= lang('App.yes_delete') ?>',
+                    cancelButtonText: '<?= lang('App.cancel') ?>'
                 }).then((result) => {
                     if (result.isConfirmed) {
                         form.submit();
@@ -517,10 +517,10 @@ $footerText = $settingModel->getSetting('footer_text', 'Powered by CodeIgniter 4
             var label = document.getElementById('themeLabel');
             if (theme === 'dark') {
                 icon.className = 'bi bi-moon';
-                label.textContent = 'Dark';
+                label.textContent = '<?= lang('App.dark_theme') ?>';
             } else {
                 icon.className = 'bi bi-sun';
-                label.textContent = 'Light';
+                label.textContent = '<?= lang('App.light_theme') ?>';
             }
         }
 

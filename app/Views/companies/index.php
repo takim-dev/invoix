@@ -1,14 +1,14 @@
 <?= $this->extend('layouts/app') ?>
-<?= $this->section('title') ?>Companies<?= $this->endSection() ?>
+<?= $this->section('title') ?><?= lang('App.companies') ?><?= $this->endSection() ?>
 <?= $this->section('content') ?>
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
-        <h5 class="mb-1">Company Management</h5>
-        <p class="text-muted mb-0" style="font-size:0.85rem;">Manage your business entities</p>
+        <h5 class="mb-1"><?= lang('App.company_management') ?></h5>
+        <p class="text-muted mb-0" style="font-size:0.85rem;"><?= lang('App.manage_business') ?></p>
     </div>
     <a href="/companies/create" class="btn btn-primary">
-        <i class="bi bi-plus-lg me-1"></i> Add Company
+        <i class="bi bi-plus-lg me-1"></i> <?= lang('App.add_company') ?>
     </a>
 </div>
 
@@ -16,10 +16,10 @@
     <div class="card">
         <div class="card-body text-center py-5">
             <i class="bi bi-building" style="font-size:3rem;display:block;margin-bottom:1rem;opacity:0.3;"></i>
-            <h5 class="text-muted">No companies yet</h5>
-            <p class="text-muted mb-3" style="font-size:0.9rem;">Start by adding your first company</p>
+            <h5 class="text-muted"><?= lang('App.no_companies') ?></h5>
+            <p class="text-muted mb-3" style="font-size:0.9rem;"><?= lang('App.add_first_company') ?></p>
             <a href="/companies/create" class="btn btn-primary">
-                <i class="bi bi-plus-lg me-1"></i> Add First Company
+                <i class="bi bi-plus-lg me-1"></i> <?= lang('App.add_first_company_btn') ?>
             </a>
         </div>
     </div>
@@ -31,7 +31,7 @@
                 <div class="card-body p-4">
                     <div class="d-flex align-items-start mb-3">
                         <?php if ($c['logo']): ?>
-                            <img src="/uploads/logos/<?= $c['logo'] ?>" alt="Logo" style="width:50px;height:50px;object-fit:contain;border-radius:10px;margin-right:1rem;background:#fff;padding:4px;flex-shrink:0;">
+                            <img src="/uploads/logos/<?= $c['logo'] ?>" alt="<?= lang('App.logo_alt') ?>" style="width:50px;height:50px;object-fit:contain;border-radius:10px;margin-right:1rem;background:#fff;padding:4px;flex-shrink:0;">
                         <?php else: ?>
                             <div style="width:50px;height:50px;border-radius:10px;background:rgba(99,102,241,0.12);display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-right:1rem;color:var(--bs-primary);flex-shrink:0;">
                                 <i class="bi bi-building"></i>
@@ -61,18 +61,18 @@
                         <?php if ($c['tax_number']): ?>
                             <div class="d-flex align-items-center">
                                 <i class="bi bi-upc me-2 text-muted" style="width:16px;"></i>
-                                <span class="text-muted">NPWP: <?= esc($c['tax_number']) ?></span>
+                                <span class="text-muted"><?= lang('App.npwp_label') ?>: <?= esc($c['tax_number']) ?></span>
                             </div>
                         <?php endif; ?>
                     </div>
                 </div>
                 <div class="card-footer bg-transparent border-top d-flex justify-content-end gap-2 py-3">
                     <a href="/companies/<?= $c['id'] ?>/edit" class="btn btn-sm btn-outline-warning">
-                        <i class="bi bi-pencil me-1"></i> Edit
+                        <i class="bi bi-pencil me-1"></i> <?= lang('App.edit') ?>
                     </a>
-                    <form action="/companies/<?= $c['id'] ?>/delete" method="POST" class="d-inline" data-confirm="Delete this company?">
+                    <form action="/companies/<?= $c['id'] ?>/delete" method="POST" class="d-inline" data-confirm="<?= lang('App.delete_company_confirm') ?>">
                         <button class="btn btn-sm btn-outline-danger">
-                            <i class="bi bi-trash me-1"></i> Delete
+                            <i class="bi bi-trash me-1"></i> <?= lang('App.delete') ?>
                         </button>
                     </form>
                 </div>
@@ -82,7 +82,7 @@
     </div>
 
     <div class="mt-4 text-muted" style="font-size:0.85rem;">
-        Total: <?= count($companies) ?> company(ies)
+        <?= str_replace('{count}', count($companies), lang('App.total_companies')) ?>
     </div>
 <?php endif; ?>
 

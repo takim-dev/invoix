@@ -23,7 +23,7 @@ class PageController extends AppController {
             'appLogo'    => $settingModel->getSetting('app_logo', ''),
             'isLoggedIn' => (bool) session()->get('user_id'),
             'userName'   => session()->get('user_name'),
-            'title'      => 'Cara Membuat Invoice',
+            'title'      => lang('Help.title'),
         ]);
     }
 

@@ -1,5 +1,5 @@
 <?= $this->extend('layouts/app') ?>
-<?= $this->section('title') ?>Account<?= $this->endSection() ?>
+<?= $this->section('title') ?><?= lang('App.account') ?><?= $this->endSection() ?>
 <?= $this->section('styles') ?>
 <style>
     .account-grid {
@@ -151,7 +151,7 @@
 ?>
 
 <div class="topbar">
-    <h2><i class="bi bi-person-gear me-2" style="color:#6571ff"></i>Account</h2>
+    <h2><i class="bi bi-person-gear me-2" style="color:#6571ff"></i><?= lang('App.account') ?></h2>
 </div>
 
 <div class="account-grid">
@@ -168,7 +168,7 @@
             <div class="quota-grid">
                 <div class="quota-card">
                     <div class="quota-card-header">
-                        <span>Companies</span>
+                        <span><?= lang('App.companies') ?></span>
                         <i class="bi bi-building"></i>
                     </div>
                     <div class="quota-value"><?= (int) $company_count ?> <small>/ <?= $maxCompanies ?></small></div>
@@ -179,7 +179,7 @@
 
                 <div class="quota-card">
                     <div class="quota-card-header">
-                        <span>Invoices</span>
+                        <span><?= lang('App.invoices') ?></span>
                         <i class="bi bi-file-earmark-text"></i>
                     </div>
                     <div class="quota-value"><?= (int) $invoice_count ?> <small>/ <?= $maxInvoices ?></small></div>
@@ -191,19 +191,19 @@
 
             <div class="account-meta">
                 <div class="account-meta-row">
-                    <span>Role</span>
+                    <span><?= lang('App.role') ?></span>
                     <strong><?= esc(ucfirst($account['role'])) ?></strong>
                 </div>
                 <div class="account-meta-row">
-                    <span>Total invoices created</span>
+                    <span><?= lang('App.total_invoices_created') ?></span>
                     <strong><?= (int) $invoice_count ?></strong>
                 </div>
                 <div class="account-meta-row">
-                    <span>Company creation limit</span>
+                    <span><?= lang('App.company_limit') ?></span>
                     <strong><?= $maxCompanies ?></strong>
                 </div>
                 <div class="account-meta-row">
-                    <span>Invoice creation limit</span>
+                    <span><?= lang('App.invoice_limit') ?></span>
                     <strong><?= $maxInvoices ?></strong>
                 </div>
             </div>
@@ -211,11 +211,11 @@
     </div>
 
     <div class="card">
-        <div class="card-header"><?= esc(lang('Common.language')) ?></div>
+        <div class="card-header"><?= lang('App.language_label') ?></div>
         <div class="card-body">
             <form action="<?= site_url('account/language') ?>" method="POST">
                 <div class="mb-3">
-                    <label class="form-label" for="language"><?= esc(lang('Common.language')) ?></label>
+                    <label class="form-label" for="language"><?= lang('App.language_label') ?></label>
                     <select id="language" name="language" class="form-select">
                         <?php foreach (\App\Filters\LocaleFilter::LOCALE_LABELS as $code => $label): ?>
                             <option value="<?= esc($code) ?>" <?= ($account['language'] ?? service('request')->getLocale()) === $code ? 'selected' : '' ?>>
@@ -223,34 +223,34 @@
                             </option>
                         <?php endforeach; ?>
                     </select>
-                    <small class="text-muted">Applied to this account on every device you log in from.</small>
+                    <small class="text-muted"><?= lang('App.language_helper') ?></small>
                 </div>
                 <button type="submit" class="btn btn-primary">
-                    <i class="bi bi-save me-1"></i> <?= esc(lang('Common.save')) ?>
+                    <i class="bi bi-save me-1"></i> <?= lang('App.save') ?>
                 </button>
             </form>
         </div>
     </div>
 
     <div class="card">
-        <div class="card-header">Change Password</div>
+        <div class="card-header"><?= lang('App.change_password') ?></div>
         <div class="card-body">
             <form action="<?= site_url('account/password') ?>" method="POST">
                 <div class="mb-3">
-                    <label class="form-label" for="current_password">Current Password</label>
+                    <label class="form-label" for="current_password"><?= lang('App.current_password') ?></label>
                     <input type="password" id="current_password" name="current_password" class="form-control" required autocomplete="current-password">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" for="password">New Password</label>
+                    <label class="form-label" for="password"><?= lang('App.new_password') ?></label>
                     <input type="password" id="password" name="password" class="form-control" required minlength="6" autocomplete="new-password">
-                    <small class="text-muted">Minimum 6 characters.</small>
+                    <small class="text-muted"><?= lang('App.min_six_chars') ?></small>
                 </div>
                 <div class="mb-4">
-                    <label class="form-label" for="confirm_password">Confirm New Password</label>
+                    <label class="form-label" for="confirm_password"><?= lang('App.confirm_new_password') ?></label>
                     <input type="password" id="confirm_password" name="confirm_password" class="form-control" required autocomplete="new-password">
                 </div>
                 <button type="submit" class="btn btn-primary">
-                    <i class="bi bi-shield-check me-1"></i> Update Password
+                    <i class="bi bi-shield-check me-1"></i> <?= lang('App.update_password') ?>
                 </button>
             </form>
         </div>

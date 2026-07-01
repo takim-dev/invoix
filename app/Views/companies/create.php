@@ -1,14 +1,14 @@
 <?= $this->extend('layouts/app') ?>
-<?= $this->section('title') ?>Add Company<?= $this->endSection() ?>
+<?= $this->section('title') ?><?= lang('App.add_company') ?><?= $this->endSection() ?>
 <?= $this->section('content') ?>
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
-        <h5 class="mb-1">Add New Company</h5>
-        <p class="text-muted mb-0" style="font-size:0.85rem;">Create a new business entity</p>
+        <h5 class="mb-1"><?= lang('App.add_new_company') ?></h5>
+        <p class="text-muted mb-0" style="font-size:0.85rem;"><?= lang('App.create_business') ?></p>
     </div>
     <a href="/companies" class="btn btn-outline-secondary btn-sm">
-        <i class="bi bi-arrow-left me-1"></i> Back
+        <i class="bi bi-arrow-left me-1"></i> <?= lang('App.back') ?>
     </a>
 </div>
 
@@ -18,42 +18,42 @@
         <div class="card-body p-4">
             <form action="/companies/store" method="POST" enctype="multipart/form-data">
                 <div class="mb-3">
-                    <label class="form-label">Company Name <span class="text-danger">*</span></label>
-                    <input type="text" name="name" id="companyName" class="form-control" required placeholder="PT Maju Jaya" value="<?= esc(old('name')) ?>">
+                    <label class="form-label"><?= lang('App.company_name') ?> <span class="text-danger">*</span></label>
+                    <input type="text" name="name" id="companyName" class="form-control" required placeholder="<?= lang('App.company_name_ph') ?>" value="<?= esc(old('name')) ?>">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Company Code</label>
-                    <input type="text" name="code" id="companyCode" class="form-control" placeholder="ACME" style="text-transform:uppercase;max-width:200px;" value="<?= esc(old('code')) ?>">
-                    <small class="text-muted">Short uppercase code (letters, numbers, dash, underscore). Used in invoice numbers, e.g. <code>INV-JHN-ACME-2026-0001</code>. Auto-suggested from name; editable. Must be unique across all companies and users.</small>
+                    <label class="form-label"><?= lang('App.company_code') ?></label>
+                    <input type="text" name="code" id="companyCode" class="form-control" placeholder="<?= lang('App.company_code_ph') ?>" style="text-transform:uppercase;max-width:200px;" value="<?= esc(old('code')) ?>">
+                    <small class="text-muted"><?= str_replace('{example}', '<code>INV-JHN-ACME-2026-0001</code>', lang('App.code_helper')) ?></small>
                 </div>
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label class="form-label">Email</label>
-                        <input type="email" name="email" class="form-control" placeholder="info@company.com">
+                        <label class="form-label"><?= lang('App.company_email') ?></label>
+                        <input type="email" name="email" class="form-control" placeholder="<?= lang('App.company_email_ph') ?>">
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label class="form-label">Phone</label>
-                        <input type="text" name="phone" class="form-control" placeholder="+62 812 xxx">
+                        <label class="form-label"><?= lang('App.company_phone') ?></label>
+                        <input type="text" name="phone" class="form-control" placeholder="<?= lang('App.company_phone_ph') ?>">
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Address</label>
-                    <textarea name="address" class="form-control" rows="2" placeholder="Jl. Sudirman No. 123, Jakarta"></textarea>
+                    <label class="form-label"><?= lang('App.company_address') ?></label>
+                    <textarea name="address" class="form-control" rows="2" placeholder="<?= lang('App.company_address_ph') ?>"></textarea>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Tax Number (NPWP)</label>
-                    <input type="text" name="tax_number" class="form-control" placeholder="00.000.000.0-000.000">
+                    <label class="form-label"><?= lang('App.company_npwp') ?></label>
+                    <input type="text" name="tax_number" class="form-control" placeholder="<?= lang('App.company_npwp_ph') ?>">
                 </div>
                 <div class="mb-4">
-                    <label class="form-label">Company Logo</label>
+                    <label class="form-label"><?= lang('App.company_logo') ?></label>
                     <input type="file" name="logo" class="form-control" accept="image/*">
-                    <small class="text-muted">PNG, JPG, max 2MB</small>
+                    <small class="text-muted"><?= lang('App.logo_helper') ?></small>
                 </div>
                 <div class="d-flex gap-2">
                     <button type="submit" class="btn btn-primary">
-                        <i class="bi bi-check-lg me-1"></i> Save Company
+                        <i class="bi bi-check-lg me-1"></i> <?= lang('App.save_company') ?>
                     </button>
-                    <a href="/companies" class="btn btn-outline-secondary">Cancel</a>
+                    <a href="/companies" class="btn btn-outline-secondary"><?= lang('App.cancel') ?></a>
                 </div>
             </form>
         </div>
