@@ -10,6 +10,8 @@
         $appTagline = $settingModel->getSetting('app_tagline', 'Smart Invoice Management');
     ?>
     <title>Register - <?= esc($appName) ?></title>
+    <link rel="icon" type="image/png" href="<?= esc($appLogo) ?>">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <style>
         :root {
             --bg: #f4f7fb;

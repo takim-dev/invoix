@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Models\UserModel;
 use App\Models\SettingModel;
 use App\Models\EmailVerificationModel;
+use App\Models\PasswordResetModel;
 use Config\Validation;
 
 class AuthController extends AppController {
@@ -12,6 +13,7 @@ class AuthController extends AppController {
         $this->userModel = new UserModel();
         $this->settingModel = new SettingModel();
         $this->emailVerificationModel = new EmailVerificationModel();
+        $this->passwordResetModel = new PasswordResetModel();
     }
 
     public function login() {
@@ -137,6 +139,79 @@ class AuthController extends AppController {
                 'app_name' => $appName,
             ])
         );
+    }
+
+    public function forgotPassword()
+    {
+        if ($this->request->getMethod() === 'POST') {
+            if (!$this->validate(Validation::$forgotPassword)) {
+                return $this->failValidation();
+            }
+
+            $email = $this->request->getPost('email');
+            $user = $this->userModel->findByEmail($email);
+
+            // Always show the same message to prevent email enumeration
+            if (!$user) {
+                return redirect()->back()->with('success', 'If that email is registered, you will receive a password reset link.');
+            }
+
+            $token = bin2hex(random_bytes(32));
+            $this->passwordResetModel->createToken($email, $token);
+
+            $emailService = new \App\Services\EmailService();
+            $appName = $this->settingModel->getSetting('app_name', 'InvoiceApp');
+            $resetUrl = site_url('/reset-password/' . $token);
+
+            $emailService->sendSimple(
+                $email,
+                'Reset Your Password - ' . $appName,
+                view('email/reset_password', [
+                    'name' => $user['name'],
+                    'reset_url' => $resetUrl,
+                    'app_name' => $appName,
+                ])
+            );
+
+            return redirect()->back()->with('success', 'If that email is registered, you will receive a password reset link.');
+        }
+
+        return view('auth/forgot_password');
+    }
+
+    public function resetPassword($token)
+    {
+        $reset = $this->passwordResetModel->getByToken($token);
+
+        if (!$reset) {
+            return redirect()->to('/login')->with('error', 'Invalid or expired password reset token.');
+        }
+
+        if (strtotime($reset['expires_at']) < time()) {
+            $this->passwordResetModel->deleteByEmail($reset['email']);
+            return redirect()->to('/login')->with('error', 'Password reset token has expired. Please request a new one.');
+        }
+
+        if ($this->request->getMethod() === 'POST') {
+            if (!$this->validate(Validation::$resetPassword)) {
+                return $this->failValidation();
+            }
+
+            $user = $this->userModel->findByEmail($reset['email']);
+            if (!$user) {
+                return redirect()->to('/login')->with('error', 'User not found.');
+            }
+
+            $this->userModel->update($user['id'], [
+                'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
+            ]);
+
+            $this->passwordResetModel->deleteByEmail($reset['email']);
+
+            return redirect()->to('/login')->with('success', 'Password reset successful! Please login with your new password.');
+        }
+
+        return view('auth/reset_password', ['token' => $token]);
     }
 
     public function logout() {

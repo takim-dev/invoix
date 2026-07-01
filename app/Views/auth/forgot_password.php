@@ -9,7 +9,7 @@
         $appLogo = $settingModel->getSetting('app_logo', '');
         $appTagline = $settingModel->getSetting('app_tagline', 'Smart Invoice Management');
     ?>
-    <title>Login - <?= esc($appName) ?></title>
+    <title>Forgot Password - <?= esc($appName) ?></title>
     <link rel="icon" type="image/png" href="<?= esc($appLogo) ?>">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <style>
@@ -30,9 +30,7 @@
             --shadow: 0 18px 48px rgba(10, 22, 40, 0.14);
         }
 
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
 
         body {
             margin: 0;
@@ -44,15 +42,8 @@
                 linear-gradient(135deg, #f0f4f8 0%, #e8ecf2 100%);
         }
 
-        a {
-            color: var(--primary);
-            font-weight: 700;
-            text-decoration: none;
-        }
-
-        a:hover {
-            color: var(--primary-dark);
-        }
+        a { color: var(--primary); font-weight: 700; text-decoration: none; }
+        a:hover { color: var(--primary-dark); }
 
         .auth-shell {
             min-height: 100vh;
@@ -132,10 +123,7 @@
             box-shadow: 0 14px 28px rgba(0, 0, 0, 0.18);
         }
 
-        .brand-mark svg {
-            width: 32px;
-            height: 32px;
-        }
+        .brand-mark svg { width: 32px; height: 32px; }
 
         .brand-mark img {
             width: 46px;
@@ -198,9 +186,7 @@
             justify-content: center;
         }
 
-        .form-header {
-            margin-bottom: 28px;
-        }
+        .form-header { margin-bottom: 28px; }
 
         .eyebrow {
             margin: 0 0 8px;
@@ -245,9 +231,7 @@
             border-color: #ffd0d0;
         }
 
-        .field {
-            margin-bottom: 18px;
-        }
+        .field { margin-bottom: 18px; }
 
         label {
             display: block;
@@ -270,38 +254,12 @@
             transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
         }
 
-        input::placeholder {
-            color: #9ca3af;
-        }
+        input::placeholder { color: #9ca3af; }
 
         input:focus {
             border-color: var(--primary);
             box-shadow: 0 0 0 4px rgba(27, 58, 92, 0.12);
             background: #fff;
-        }
-
-        .form-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 14px;
-            margin: 2px 0 22px;
-            color: var(--muted);
-            font-size: 13px;
-        }
-
-        .check {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            user-select: none;
-        }
-
-        .check input {
-            width: 16px;
-            height: 16px;
-            padding: 0;
-            accent-color: var(--primary);
         }
 
         .btn-primary {
@@ -328,10 +286,7 @@
             box-shadow: 0 16px 28px rgba(27, 58, 92, 0.30);
         }
 
-        .btn-primary svg {
-            width: 18px;
-            height: 18px;
-        }
+        .btn-primary svg { width: 18px; height: 18px; }
 
         .switch-link {
             margin: 22px 0 0;
@@ -341,38 +296,18 @@
         }
 
         @media (max-width: 760px) {
-            .auth-shell {
-                padding: 18px;
-                align-items: start;
-            }
-
-            .auth-card {
-                grid-template-columns: 1fr;
-            }
-
-            .auth-aside {
-                min-height: auto;
-                gap: 32px;
-                padding: 28px;
-            }
-
-            .aside-copy h1 {
-                font-size: 26px;
-            }
-
-            .aside-stats {
-                grid-template-columns: 1fr;
-            }
-
-            .auth-form {
-                padding: 32px 24px;
-            }
+            .auth-shell { padding: 18px; align-items: start; }
+            .auth-card { grid-template-columns: 1fr; }
+            .auth-aside { min-height: auto; gap: 32px; padding: 28px; }
+            .aside-copy h1 { font-size: 26px; }
+            .aside-stats { grid-template-columns: 1fr; }
+            .auth-form { padding: 32px 24px; }
         }
     </style>
 </head>
 <body>
     <main class="auth-shell">
-        <section class="auth-card" aria-label="Login">
+        <section class="auth-card" aria-label="Forgot Password">
             <aside class="auth-aside">
                 <div class="brand-row">
                     <div class="brand-mark" aria-hidden="true">
@@ -390,31 +325,31 @@
                 </div>
 
                 <div class="aside-copy">
-                    <h1>Invoice workspace</h1>
+                    <h1>Forgot your password?</h1>
                     <p><?= esc($appTagline) ?></p>
                 </div>
 
                 <div class="aside-stats" aria-label="Highlights">
                     <div class="stat">
-                        <strong>PDF</strong>
-                        <span>Export</span>
+                        <strong>Secure</strong>
+                        <span>Reset</span>
                     </div>
                     <div class="stat">
-                        <strong>IDR</strong>
-                        <span>Currency</span>
+                        <strong>1 Hour</strong>
+                        <span>Expiry</span>
                     </div>
                     <div class="stat">
-                        <strong>Admin</strong>
-                        <span>Panel</span>
+                        <strong>Email</strong>
+                        <span>Link</span>
                     </div>
                 </div>
             </aside>
 
             <div class="auth-form">
                 <header class="form-header">
-                    <p class="eyebrow">Welcome back</p>
-                    <h2>Sign in to your account</h2>
-                    <p>Masuk dengan email dan password yang sudah terdaftar.</p>
+                    <p class="eyebrow">Reset access</p>
+                    <h2>Reset Password</h2>
+                    <p>Enter your registered email and we will send you a reset link.</p>
                 </header>
 
                 <?php if (session()->getFlashdata('success')): ?>
@@ -425,36 +360,23 @@
                     <div class="alert alert-danger"><?= session()->getFlashdata('error') ?></div>
                 <?php endif; ?>
 
-                <form method="POST" action="<?= site_url('login') ?>">
+                <form method="POST" action="<?= site_url('forgot-password') ?>">
                     <?= csrf_field() ?>
 
                     <div class="field">
                         <label for="email">Email address</label>
-                        <input id="email" type="email" name="email" required value="<?= old('email') ?>" placeholder="admin@invoice.local" autocomplete="email">
-                    </div>
-
-                    <div class="field">
-                        <label for="password">Password</label>
-                        <input id="password" type="password" name="password" required placeholder="Enter your password" autocomplete="current-password">
-                    </div>
-
-                    <div class="form-row">
-                        <label class="check">
-                            <input type="checkbox" name="remember" value="1">
-                            <span>Remember me</span>
-                        </label>
-                        <a href="<?= site_url('forgot-password') ?>">Forgot password?</a>
+                        <input id="email" type="email" name="email" required value="<?= old('email') ?>" placeholder="you@example.com" autocomplete="email">
                     </div>
 
                     <button class="btn-primary" type="submit">
                         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
                             <path d="M5 12h12M13 8l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Login
+                        Send Reset Link
                     </button>
                 </form>
 
-                <p class="switch-link">Don't have an account? <a href="<?= site_url('register') ?>">Create account</a></p>
+                <p class="switch-link">Remember your password? <a href="<?= site_url('login') ?>">Sign in</a></p>
             </div>
         </section>
     </main>

@@ -82,4 +82,13 @@ class Validation extends BaseConfig
         'password'         => 'required|min_length[6]',
         'confirm_password' => 'required|matches[password]',
     ];
+
+    public static array $forgotPassword = [
+        'email' => 'required|valid_email',
+    ];
+
+    public static array $resetPassword = [
+        'password'         => 'required|min_length[6]',
+        'confirm_password' => 'required|matches[password]',
+    ];
 }

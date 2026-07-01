@@ -17,6 +17,12 @@ $routes->post('/register', 'AuthController::register');
 $routes->get('/logout', 'AuthController::logout');
 $routes->get('/verify-email/(:any)', 'AuthController::verifyEmail/$1');
 
+// Forgot / Reset Password
+$routes->get('/forgot-password', 'AuthController::forgotPassword');
+$routes->post('/forgot-password', 'AuthController::forgotPassword');
+$routes->get('/reset-password/(:any)', 'AuthController::resetPassword/$1');
+$routes->post('/reset-password/(:any)', 'AuthController::resetPassword/$1');
+
 // Account
 $routes->get('/account', 'AccountController::index');
 $routes->post('/account/password', 'AccountController::updatePassword');
