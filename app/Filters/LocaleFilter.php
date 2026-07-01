@@ -17,6 +17,10 @@ class LocaleFilter implements FilterInterface {
         'ms' => 'Bahasa Malaysia',
         'zh' => '中文',
         'vi' => 'Tiếng Việt',
+        'ar' => 'العربية',
+        'es' => 'Español',
+        'fr' => 'Français',
+        'hi' => 'हिन्दी',
     ];
 
     public function before(RequestInterface $request, $arguments = null) {

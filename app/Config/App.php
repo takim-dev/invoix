@@ -100,7 +100,7 @@ class App extends BaseConfig
      * Used by Language and Request to honor per-user language preference.
      * Keep in sync with the LOCALE_LABELS map in LocaleFilter and Account views.
      */
-    public array $supportedLocales = ['en', 'id', 'ms', 'zh', 'vi'];
+    public array $supportedLocales = ['en', 'id', 'ms', 'zh', 'vi', 'ar', 'es', 'fr', 'hi'];
 
     /**
      * --------------------------------------------------------------------------

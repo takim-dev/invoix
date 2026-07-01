@@ -6,6 +6,10 @@
         'ms' => 'my',
         'zh' => 'cn',
         'vi' => 'vn',
+        'ar' => 'sa',
+        'es' => 'es',
+        'fr' => 'fr',
+        'hi' => 'in',
     ];
     $current = service('request')->getLocale();
     if (!isset($labels[$current])) $current = 'en';
