@@ -16,7 +16,7 @@
 <div class="col-lg-8">
     <div class="card">
         <div class="card-body p-4">
-            <form action="/admin/settings" method="POST" enctype="multipart/form-data">
+            <form action="<?= site_url('admin/settings') ?>" method="POST" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label class="form-label">App Name</label>
                     <input type="text" name="app_name" class="form-control" value="<?= esc($settings['app_name'] ?? 'InvoiceApp') ?>" placeholder="InvoiceApp">
@@ -42,6 +42,17 @@
                     <label class="form-label">App Tagline</label>
                     <input type="text" name="app_tagline" class="form-control" value="<?= esc($settings['app_tagline'] ?? 'Smart Invoice Management') ?>" placeholder="Smart Invoice Management">
                     <small class="text-muted">Short description shown on login page</small>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Default Language</label>
+                    <select name="default_locale" class="form-select">
+                        <?php foreach (\App\Filters\LocaleFilter::LOCALE_LABELS as $code => $label): ?>
+                            <option value="<?= esc($code) ?>" <?= ($settings['default_locale'] ?? 'en') === $code ? 'selected' : '' ?>>
+                                <?= esc($label) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                    <small class="text-muted">Default language for visitors and new users (logged-in users set their own).</small>
                 </div>
                 <div class="mb-4">
                     <label class="form-label">Footer Text</label>

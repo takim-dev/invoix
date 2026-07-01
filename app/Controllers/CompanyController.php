@@ -136,8 +136,60 @@ class CompanyController extends AppController {
 
         $newName = $file->getRandomName();
         $file->move(FCPATH . 'uploads/logos', $newName);
+        $this->downscaleStoredLogo(FCPATH . 'uploads/logos/' . $newName);
         $this->deleteLogoFile($oldLogo);
         return $newName;
+    }
+
+    /**
+     * Downscale an uploaded logo in place so its longest edge is at most 1000px.
+     * Keeps PDF embedding lightweight and prevents OOM when dompdf decodes the raster.
+     */
+    private function downscaleStoredLogo(string $path, int $maxDim = 1000): void {
+        if (!function_exists('imagecreatetruecolor')) return;
+
+        $info = @getimagesize($path);
+        if (!$info) return;
+        [$w, $h, $type] = $info;
+        if ($w <= 0 || $h <= 0) return;
+        // Refuse to decode absurdly large rasters (safety cap on memory).
+        if ($w * $h > 80_000_000) return;
+        if ($w <= $maxDim && $h <= $maxDim) return;
+
+        // Resize needs more memory than default for large rasters.
+        @ini_set('memory_limit', '1024M');
+
+        $src = null;
+        switch ($type) {
+            case IMAGETYPE_PNG:  $src = @imagecreatefrompng($path);  break;
+            case IMAGETYPE_JPEG: $src = @imagecreatefromjpeg($path); break;
+            case IMAGETYPE_WEBP:
+                $src = function_exists('imagecreatefromwebp') ? @imagecreatefromwebp($path) : null;
+                break;
+            default: return;
+        }
+        if (!$src) return;
+
+        $ratio  = min($maxDim / $w, $maxDim / $h, 1.0);
+        $newW   = max(1, (int) round($w * $ratio));
+        $newH   = max(1, (int) round($h * $ratio));
+
+        $dst = imagecreatetruecolor($newW, $newH);
+        imagealphablending($dst, false);
+        imagesavealpha($dst, true);
+        $transparent = imagecolorallocatealpha($dst, 0, 0, 0, 127);
+        imagefill($dst, 0, 0, $transparent);
+        imagecopyresampled($dst, $src, 0, 0, 0, 0, $newW, $newH, $w, $h);
+        imagedestroy($src);
+
+        switch ($type) {
+            case IMAGETYPE_PNG:  imagepng($dst, $path, 6);  break;
+            case IMAGETYPE_JPEG: imagejpeg($dst, $path, 85); break;
+            case IMAGETYPE_WEBP:
+                if (function_exists('imagewebp')) imagewebp($dst, $path, 85);
+                break;
+        }
+        imagedestroy($dst);
     }
 
     private function deleteLogoFile(?string $logo): void {

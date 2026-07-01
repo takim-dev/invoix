@@ -82,7 +82,7 @@
         }
 
         .nav-cta { display: flex; gap: 0.5rem; align-items: center; }
-        .nav-links { display: flex; gap: 1.4rem; align-items: center; margin-right: 0.4rem; }
+        .nav-links { display: flex; gap: 1.4rem; align-items: center; justify-content: center; flex: 1; }
         .nav-links a {
             color: var(--muted); text-decoration: none; font-weight: 500; font-size: 0.95rem;
         }
@@ -108,6 +108,16 @@
         .landing-footer .brand { font-size: 1.05rem; color: var(--ink); }
         .landing-footer a { color: var(--muted); text-decoration: none; }
         .landing-footer a:hover { color: var(--brand); }
+        .lang-label { font-size: 0.85rem; color: var(--muted); white-space: nowrap; margin-right: 0.3rem; }
+        .lang-dropdown { position: relative; }
+        .lang-dropdown-btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.7rem; border: 1px solid var(--bs-border-color); border-radius: 8px; background: transparent; color: var(--ink); font-size: 0.85rem; cursor: pointer; white-space: nowrap; }
+        .lang-dropdown-btn:hover { border-color: var(--brand); }
+        .lang-dropdown-menu { display: none; position: absolute; top: 100%; right: 0; z-index: 1050; margin-top: 0.3rem; min-width: 180px; background: var(--bs-body-bg); border: 1px solid var(--bs-border-color); border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.12); overflow: hidden; }
+        .lang-dropdown.open .lang-dropdown-menu { display: block; }
+        .lang-dropdown-item { display: flex; align-items: center; gap: 0.5rem; padding: 0.55rem 0.85rem; color: var(--ink); text-decoration: none; font-size: 0.9rem; transition: background 0.1s; }
+        .lang-dropdown-item:hover { background: var(--brand-soft); }
+        .lang-dropdown-item.active { background: var(--brand-soft); color: var(--brand); font-weight: 600; }
+        .lang-flag { border-radius: 2px; flex: 0 0 auto; }
 
         <?= $this->renderSection('styles') ?>
     </style>
@@ -115,23 +125,24 @@
 <body>
 
 <nav class="landing-nav">
-    <div class="container d-flex align-items-center justify-content-between">
+    <div class="container d-flex align-items-center">
         <a href="/" class="brand">
             <?= $brandMark() ?>
             <?= esc($appName) ?>
         </a>
-        <div class="nav-cta">
-            <div class="nav-links d-none d-md-flex">
-                <a href="/about">About</a>
-                <a href="/contact">Contact</a>
-            </div>
+        <div class="nav-links d-none d-md-flex">
+            <a href="/about"><?= lang('Landing.nav_about') ?></a>
+            <a href="/contact"><?= lang('Landing.nav_contact') ?></a>
+        </div>
+        <div class="nav-cta ms-auto">
+            <?= view('partials/lang_switcher') ?>
             <?php if (!empty($isLoggedIn)): ?>
                 <a href="/dashboard" class="btn btn-brand">
-                    <i class="bi bi-grid-1x2-fill me-1"></i> Dashboard
+                    <i class="bi bi-grid-1x2-fill me-1"></i> <?= lang('Landing.cta_goto_dashboard') ?>
                 </a>
             <?php else: ?>
-                <a href="/login" class="btn btn-outline-ink">Login</a>
-                <a href="/register" class="btn btn-brand">Get Started Free</a>
+                <a href="/login" class="btn btn-outline-ink"><?= lang('Landing.cta_login') ?></a>
+                <a href="/register" class="btn btn-brand"><?= lang('Landing.cta_get_started') ?></a>
             <?php endif; ?>
         </div>
     </div>
@@ -146,15 +157,15 @@
             <?= esc($appName) ?>
         </a>
         <div class="d-flex gap-3">
-            <a href="/about">About</a>
-            <a href="/contact">Contact</a>
+            <a href="/about"><?= lang('Landing.nav_about') ?></a>
+            <a href="/contact"><?= lang('Landing.nav_contact') ?></a>
             <?php if (!empty($isLoggedIn)): ?>
-                <a href="/dashboard">Dashboard</a>
-                <a href="/account">Account</a>
-                <a href="/logout">Logout</a>
+                <a href="/dashboard"><?= lang('Nav.dashboard') ?></a>
+                <a href="/account"><?= lang('Nav.account') ?></a>
+                <a href="/logout"><?= lang('Nav.logout') ?></a>
             <?php else: ?>
-                <a href="/login">Login</a>
-                <a href="/register">Sign up</a>
+                <a href="/login"><?= lang('Landing.cta_login') ?></a>
+                <a href="/register"><?= lang('Landing.footer_signup') ?></a>
             <?php endif; ?>
         </div>
         <div>&copy; <?= date('Y') ?> <?= esc($appName) ?>. All rights reserved.</div>
@@ -162,6 +173,13 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.lang-dropdown')) {
+            document.querySelectorAll('.lang-dropdown.open').forEach(function(d) { d.classList.remove('open'); });
+        }
+    });
+</script>
 <?= $this->renderSection('scripts') ?>
 
 </body>

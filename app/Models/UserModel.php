@@ -8,7 +8,7 @@ class UserModel extends Model {
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
     protected $useTimestamps = true;
-    protected $allowedFields = ['name','code','email','password','role','status','max_companies','max_invoices'];
+    protected $allowedFields = ['name','code','language','email','password','role','status','max_companies','max_invoices'];
 
     public function findByEmail($email) {
         return $this->where('email', $email)->first();

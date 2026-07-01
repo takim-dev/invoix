@@ -206,36 +206,36 @@
         <div class="row align-items-center g-5">
             <div class="col-lg-6">
                 <span class="hero-eyebrow">
-                    <i class="bi bi-stars"></i> Simple. Fast. Professional.
+                    <i class="bi bi-stars"></i> <?= esc(lang('Landing.eyebrow')) ?>
                 </span>
                 <h1>
-                    Professional invoices,<br>
-                    <span class="accent">in seconds.</span>
+                    <?= esc(lang('Landing.hero_title_1')) ?><br>
+                    <span class="accent"><?= esc(lang('Landing.hero_title_2')) ?></span>
                 </h1>
                 <p class="lead">
-                    Create, send, and track invoices across 6 currencies. Manage multiple companies, build a reusable item catalog, and export polished PDFs — all in one clean dashboard.
+                    <?= esc(lang('Landing.hero_lead')) ?>
                 </p>
                 <div class="hero-cthas">
                     <?php if (!empty($isLoggedIn)): ?>
                         <a href="/dashboard" class="btn btn-brand btn-lg">
-                            <i class="bi bi-grid-1x2-fill me-1"></i> Go to Dashboard
+                            <i class="bi bi-grid-1x2-fill me-1"></i> <?= esc(lang('Landing.cta_goto_dashboard')) ?>
                         </a>
                     <?php else: ?>
                         <a href="/register" class="btn btn-brand btn-lg">
-                            <i class="bi bi-rocket-takeoff me-1"></i> Get Started Free
+                            <i class="bi bi-rocket-takeoff me-1"></i> <?= esc(lang('Landing.cta_get_started')) ?>
                         </a>
                         <a href="/login" class="btn btn-outline-ink btn-lg">
-                            <i class="bi bi-box-arrow-in-right me-1"></i> Login
+                            <i class="bi bi-box-arrow-in-right me-1"></i> <?= esc(lang('Landing.cta_login')) ?>
                         </a>
                     <?php endif; ?>
                 </div>
                 <div class="hero-meta">
                     <?php if (!empty($isLoggedIn) && !empty($userName)): ?>
-                        <span><i class="bi bi-person-check-fill"></i> Logged in as <?= esc($userName) ?></span>
+                        <span><i class="bi bi-person-check-fill"></i> <?= esc(lang('Landing.logged_in_as')) ?> <?= esc($userName) ?></span>
                     <?php else: ?>
-                        <span><i class="bi bi-check-circle-fill"></i> No credit card required</span>
-                        <span><i class="bi bi-check-circle-fill"></i> Multi-currency ready</span>
-                        <span><i class="bi bi-check-circle-fill"></i> PDF export built-in</span>
+                        <span><i class="bi bi-check-circle-fill"></i> <?= esc(lang('Landing.meta_no_cc')) ?></span>
+                        <span><i class="bi bi-check-circle-fill"></i> <?= esc(lang('Landing.meta_multi_cur')) ?></span>
+                        <span><i class="bi bi-check-circle-fill"></i> <?= esc(lang('Landing.meta_pdf')) ?></span>
                     <?php endif; ?>
                 </div>
             </div>
@@ -302,52 +302,52 @@
 <section class="section" id="features">
     <div class="container">
         <div class="text-center">
-            <div class="section-eyebrow">Everything you need</div>
-            <h2 class="section-title">Built for freelancers and small teams</h2>
-            <p class="section-subtitle">All the essentials to bill clients professionally — without the bloat of enterprise software.</p>
+            <div class="section-eyebrow"><?= esc(lang('Landing.features_eyebrow')) ?></div>
+            <h2 class="section-title"><?= esc(lang('Landing.features_title')) ?></h2>
+            <p class="section-subtitle"><?= esc(lang('Landing.features_subtitle')) ?></p>
         </div>
 
         <div class="row g-4 mt-1">
             <div class="col-md-6 col-lg-4">
                 <div class="feature-card">
                     <span class="feature-icon"><i class="bi bi-lightning-charge"></i></span>
-                    <h5>Lightning fast</h5>
-                    <p>Create and send an invoice in under a minute. Server-side DataTables keep long lists snappy.</p>
+                    <h5><?= esc(lang('Landing.feature_fast_t')) ?></h5>
+                    <p><?= esc(lang('Landing.feature_fast_d')) ?></p>
                 </div>
             </div>
             <div class="col-md-6 col-lg-4">
                 <div class="feature-card">
                     <span class="feature-icon"><i class="bi bi-cash-stack"></i></span>
-                    <h5>Multi-currency</h5>
-                    <p>USD, IDR, SGD, JPY, CNY, MYR. Item prices can be defined per currency and flow through to invoice totals.</p>
+                    <h5><?= esc(lang('Landing.feature_cur_t')) ?></h5>
+                    <p><?= esc(lang('Landing.feature_cur_d')) ?></p>
                 </div>
             </div>
             <div class="col-md-6 col-lg-4">
                 <div class="feature-card">
                     <span class="feature-icon"><i class="bi bi-file-earmark-pdf"></i></span>
-                    <h5>One-click PDF</h5>
-                    <p>Polished PDF export with your company branding — ready to email or print on the spot.</p>
+                    <h5><?= esc(lang('Landing.feature_pdf_t')) ?></h5>
+                    <p><?= esc(lang('Landing.feature_pdf_d')) ?></p>
                 </div>
             </div>
             <div class="col-md-6 col-lg-4">
                 <div class="feature-card">
                     <span class="feature-icon"><i class="bi bi-building"></i></span>
-                    <h5>Multiple companies</h5>
-                    <p>Run several businesses under one account. Each gets its own short code embedded in invoice numbers.</p>
+                    <h5><?= esc(lang('Landing.feature_co_t')) ?></h5>
+                    <p><?= esc(lang('Landing.feature_co_d')) ?></p>
                 </div>
             </div>
             <div class="col-md-6 col-lg-4">
                 <div class="feature-card">
                     <span class="feature-icon"><i class="bi bi-box-seam"></i></span>
-                    <h5>Item catalog</h5>
-                    <p>Reusable items with categories and per-currency pricing. Pick from catalog when building invoices.</p>
+                    <h5><?= esc(lang('Landing.feature_cat_t')) ?></h5>
+                    <p><?= esc(lang('Landing.feature_cat_d')) ?></p>
                 </div>
             </div>
             <div class="col-md-6 col-lg-4">
                 <div class="feature-card">
                     <span class="feature-icon"><i class="bi bi-shield-lock"></i></span>
-                    <h5>Secure by design</h5>
-                    <p>Per-user data ownership, admin approval flow, optional email verification, and CSRF protection throughout.</p>
+                    <h5><?= esc(lang('Landing.feature_sec_t')) ?></h5>
+                    <p><?= esc(lang('Landing.feature_sec_d')) ?></p>
                 </div>
             </div>
         </div>
@@ -358,29 +358,29 @@
 <section class="section" id="how" style="background: var(--bg-soft);">
     <div class="container">
         <div class="text-center">
-            <div class="section-eyebrow">How it works</div>
-            <h2 class="section-title">From zero to sent in 3 steps</h2>
+            <div class="section-eyebrow"><?= esc(lang('Landing.how_eyebrow')) ?></div>
+            <h2 class="section-title"><?= esc(lang('Landing.how_title')) ?></h2>
         </div>
         <div class="row g-4 mt-1">
             <div class="col-md-4">
                 <div class="step-card">
                     <div class="step-num">1</div>
-                    <h6>Add your company</h6>
-                    <p>Set up company profile, logo, and tax info. Get a short code auto-generated from the name.</p>
+                    <h6><?= esc(lang('Landing.step1_t')) ?></h6>
+                    <p><?= esc(lang('Landing.step1_d')) ?></p>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="step-card">
                     <div class="step-num">2</div>
-                    <h6>Build your catalog</h6>
-                    <p>Add reusable items with category, unit, and per-currency pricing. Pick them later in seconds.</p>
+                    <h6><?= esc(lang('Landing.step2_t')) ?></h6>
+                    <p><?= esc(lang('Landing.step2_d')) ?></p>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="step-card">
                     <div class="step-num">3</div>
-                    <h6>Create &amp; send</h6>
-                    <p>Compose an invoice, watch totals update live, then download a polished PDF or print instantly.</p>
+                    <h6><?= esc(lang('Landing.step3_t')) ?></h6>
+                    <p><?= esc(lang('Landing.step3_d')) ?></p>
                 </div>
             </div>
         </div>
@@ -392,16 +392,16 @@
     <div class="container">
         <div class="cta-banner">
             <?php if (!empty($isLoggedIn)): ?>
-                <h2>Welcome back, <?= esc($userName ?? '') ?>!</h2>
-                <p>Pick up where you left off.</p>
+                <h2><?= esc(lang('Landing.welcome_back')) ?> <?= esc($userName ?? '') ?>!</h2>
+                <p><?= esc(lang('Landing.cta_banner_title_user')) ?></p>
                 <a href="/dashboard" class="btn btn-white btn-lg">
-                    <i class="bi bi-grid-1x2-fill me-1"></i> Open Dashboard
+                    <i class="bi bi-grid-1x2-fill me-1"></i> <?= esc(lang('Landing.cta_open_dashboard')) ?>
                 </a>
             <?php else: ?>
-                <h2>Ready to send your first invoice?</h2>
-                <p>Free account. No credit card. Set up in minutes.</p>
+                <h2><?= esc(lang('Landing.cta_banner_title_guest')) ?></h2>
+                <p><?= esc(lang('Landing.cta_banner_desc_guest')) ?></p>
                 <a href="/register" class="btn btn-white btn-lg">
-                    <i class="bi bi-rocket-takeoff me-1"></i> Get Started Free
+                    <i class="bi bi-rocket-takeoff me-1"></i> <?= esc(lang('Landing.cta_banner_button')) ?>
                 </a>
             <?php endif; ?>
         </div>

@@ -54,4 +54,19 @@ class AccountController extends AppController {
 
         return redirect()->to('/account')->with('success', 'Password updated successfully.');
     }
+
+    public function updateLanguage() {
+        $userId = $this->currentUserId();
+        $locale = trim((string) $this->request->getPost('language'));
+
+        $supported = config('App')->supportedLocales;
+        if (!in_array($locale, $supported, true)) {
+            return redirect()->back()->with('error', 'Unsupported language.');
+        }
+
+        $this->userModel->update($userId, ['language' => $locale]);
+        session()->set('locale', $locale);
+
+        return redirect()->to('/account')->with('success', 'Language preference saved.');
+    }
 }

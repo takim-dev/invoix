@@ -68,6 +68,16 @@ $footerText = $settingModel->getSetting('footer_text', 'Powered by CodeIgniter 4
         .sidebar-brand-text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .page-title-brand { display: inline-flex; align-items: center; gap: 0.6rem; min-width: 0; }
         .page-title-logo { width: 26px; height: 26px; object-fit: contain; border-radius: 6px; }
+        .lang-label { font-size: 0.8rem; color: var(--bs-secondary-color); white-space: nowrap; margin-right: 0.3rem; }
+        .lang-dropdown { position: relative; }
+        .lang-dropdown-btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.35rem 0.6rem; border: 1px solid var(--bs-border-color); border-radius: 8px; background: var(--bs-body-bg); color: var(--bs-body-color); font-size: 0.82rem; cursor: pointer; white-space: nowrap; }
+        .lang-dropdown-btn:hover { border-color: var(--bs-primary); }
+        .lang-dropdown-menu { display: none; position: absolute; top: 100%; right: 0; z-index: 1050; margin-top: 0.3rem; min-width: 180px; background: var(--bs-body-bg); border: 1px solid var(--bs-border-color); border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.12); overflow: hidden; }
+        .lang-dropdown.open .lang-dropdown-menu { display: block; }
+        .lang-dropdown-item { display: flex; align-items: center; gap: 0.5rem; padding: 0.55rem 0.85rem; color: var(--bs-body-color); text-decoration: none; font-size: 0.85rem; transition: background 0.1s; }
+        .lang-dropdown-item:hover { background: var(--bs-tertiary-bg); }
+        .lang-dropdown-item.active { background: rgba(101,113,255,0.1); color: #6571ff; font-weight: 600; }
+        .lang-flag { border-radius: 2px; flex: 0 0 auto; }
 
         /* ===== LIGHT THEME FIXES ===== */
         [data-bs-theme="light"] .card { background: var(--bs-body-bg); }
@@ -297,88 +307,88 @@ $footerText = $settingModel->getSetting('footer_text', 'Powered by CodeIgniter 4
             </div>
             <div class="sidebar-body">
                 <ul class="nav" id="sidebarNav">
-                    <li class="nav-item nav-category">Main</li>
+                    <li class="nav-item nav-category"><?= lang('Nav.main') ?></li>
                     <li class="nav-item">
                         <a href="/dashboard" class="nav-link <?= uri_string() === 'dashboard' ? 'active' : '' ?>">
                             <i class="link-icon bi bi-speedometer2"></i>
-                            <span class="link-title">Dashboard</span>
+                            <span class="link-title"><?= lang('Nav.dashboard') ?></span>
                         </a>
                     </li>
-                    <li class="nav-item nav-category">Business</li>
+                    <li class="nav-item nav-category"><?= lang('Nav.business') ?></li>
                     <li class="nav-item">
                         <a href="/companies" class="nav-link <?= str_starts_with(uri_string(), 'companies') ? 'active' : '' ?>">
                             <i class="link-icon bi bi-building"></i>
-                            <span class="link-title">Companies</span>
+                            <span class="link-title"><?= lang('Nav.companies') ?></span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="/items/categories" class="nav-link <?= str_starts_with(uri_string(), 'items/categories') ? 'active' : '' ?>">
                             <i class="link-icon bi bi-tags"></i>
-                            <span class="link-title">Categories</span>
+                            <span class="link-title"><?= lang('Nav.categories') ?></span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="/items" class="nav-link <?= str_starts_with(uri_string(), 'items') && !str_starts_with(uri_string(), 'items/categories') ? 'active' : '' ?>">
                             <i class="link-icon bi bi-box"></i>
-                            <span class="link-title">Items</span>
+                            <span class="link-title"><?= lang('Nav.items') ?></span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="/invoices" class="nav-link <?= str_starts_with(uri_string(), 'invoices') ? 'active' : '' ?>">
                             <i class="link-icon bi bi-file-earmark-text"></i>
-                            <span class="link-title">Invoices</span>
+                            <span class="link-title"><?= lang('Nav.invoices') ?></span>
                         </a>
                     </li>
                     <?php if (session()->get('role') === 'admin'): ?>
-                    <li class="nav-item nav-category">Admin</li>
+                    <li class="nav-item nav-category"><?= lang('Nav.admin_section') ?></li>
                     <li class="nav-item">
                         <a href="/admin" class="nav-link <?= uri_string() === 'admin' ? 'active' : '' ?>">
                             <i class="link-icon bi bi-shield-lock"></i>
-                            <span class="link-title">Admin Panel</span>
+                            <span class="link-title"><?= lang('Nav.admin_panel') ?></span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="/admin/settings" class="nav-link <?= str_starts_with(uri_string(), 'admin/settings') ? 'active' : '' ?>">
                             <i class="link-icon bi bi-gear"></i>
-                            <span class="link-title">App Settings</span>
+                            <span class="link-title"><?= lang('Nav.app_settings') ?></span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="/admin/invoice-config" class="nav-link <?= str_starts_with(uri_string(), 'admin/invoice-config') ? 'active' : '' ?>">
                             <i class="link-icon bi bi-sliders"></i>
-                            <span class="link-title">Invoice Config</span>
+                            <span class="link-title"><?= lang('Nav.invoice_config') ?></span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="/admin/auth-settings" class="nav-link <?= str_starts_with(uri_string(), 'admin/auth-settings') ? 'active' : '' ?>">
                             <i class="link-icon bi bi-shield-check"></i>
-                            <span class="link-title">Auth Settings</span>
+                            <span class="link-title"><?= lang('Nav.auth_settings') ?></span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="/admin/email-config" class="nav-link <?= str_starts_with(uri_string(), 'admin/email-config') ? 'active' : '' ?>">
                             <i class="link-icon bi bi-envelope-fill"></i>
-                            <span class="link-title">Email Config</span>
+                            <span class="link-title"><?= lang('Nav.email_config') ?></span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="/admin/pages" class="nav-link <?= str_starts_with(uri_string(), 'admin/pages') ? 'active' : '' ?>">
                             <i class="link-icon bi bi-file-earmark-richtext"></i>
-                            <span class="link-title">Pages</span>
+                            <span class="link-title"><?= lang('Nav.pages') ?></span>
                         </a>
                     </li>
                     <?php endif; ?>
-                    <li class="nav-item nav-category">Account</li>
+                    <li class="nav-item nav-category"><?= lang('Nav.account_section') ?></li>
                     <li class="nav-item">
                         <a href="/account" class="nav-link <?= str_starts_with(uri_string(), 'account') ? 'active' : '' ?>">
                             <i class="link-icon bi bi-person-gear"></i>
-                            <span class="link-title">Account</span>
+                            <span class="link-title"><?= lang('Nav.account') ?></span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="/logout" class="nav-link">
                             <i class="link-icon bi bi-box-arrow-left"></i>
-                            <span class="link-title">Logout</span>
+                            <span class="link-title"><?= lang('Nav.logout') ?></span>
                         </a>
                     </li>
                 </ul>
@@ -396,9 +406,10 @@ $footerText = $settingModel->getSetting('footer_text', 'Powered by CodeIgniter 4
                     <span><?= $this->renderSection('title') ?></span>
                 </h4>
                 <div class="d-flex align-items-center gap-3">
+                    <?= view('partials/lang_switcher') ?>
                     <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
                         <i class="bi bi-sun" id="themeIcon"></i>
-                        <span id="themeLabel">Light</span>
+                        <span id="themeLabel"><?= lang('Common.theme_light') ?></span>
                     </button>
                     <span style="font-size:0.85rem;">
                         <i class="bi bi-person-circle me-1"></i><?= esc(session()->get('user_name') ?? '') ?>
@@ -520,6 +531,13 @@ $footerText = $settingModel->getSetting('footer_text', 'Powered by CodeIgniter 4
         })();
     </script>
 
+    <script>
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.lang-dropdown')) {
+                document.querySelectorAll('.lang-dropdown.open').forEach(function(d) { d.classList.remove('open'); });
+            }
+        });
+    </script>
     <?= $this->renderSection('scripts') ?>
 </body>
 </html>

@@ -211,6 +211,28 @@
     </div>
 
     <div class="card">
+        <div class="card-header"><?= esc(lang('Common.language')) ?></div>
+        <div class="card-body">
+            <form action="<?= site_url('account/language') ?>" method="POST">
+                <div class="mb-3">
+                    <label class="form-label" for="language"><?= esc(lang('Common.language')) ?></label>
+                    <select id="language" name="language" class="form-select">
+                        <?php foreach (\App\Filters\LocaleFilter::LOCALE_LABELS as $code => $label): ?>
+                            <option value="<?= esc($code) ?>" <?= ($account['language'] ?? service('request')->getLocale()) === $code ? 'selected' : '' ?>>
+                                <?= esc($label) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                    <small class="text-muted">Applied to this account on every device you log in from.</small>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-save me-1"></i> <?= esc(lang('Common.save')) ?>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="card">
         <div class="card-header">Change Password</div>
         <div class="card-body">
             <form action="<?= site_url('account/password') ?>" method="POST">

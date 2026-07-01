@@ -154,7 +154,7 @@ class AdminController extends AppController {
         $settings = $settingModel->getAllSettings();
 
         if ($this->request->getMethod() === 'POST') {
-            foreach (['app_name', 'app_tagline', 'footer_text'] as $field) {
+            foreach (['app_name', 'app_tagline', 'footer_text', 'default_locale'] as $field) {
                 $value = $this->request->getPost($field);
                 if ($value !== null) {
                     $settingModel->saveSetting($field, trim($value));

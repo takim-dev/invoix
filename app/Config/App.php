@@ -96,6 +96,13 @@ class App extends BaseConfig
     public string $defaultLocale = 'en';
 
     /**
+     * Supported locales follow the pattern <lang>-<region>.
+     * Used by Language and Request to honor per-user language preference.
+     * Keep in sync with the LOCALE_LABELS map in LocaleFilter and Account views.
+     */
+    public array $supportedLocales = ['en', 'id', 'ms', 'zh', 'vi'];
+
+    /**
      * --------------------------------------------------------------------------
      * Negotiate Locale
      * --------------------------------------------------------------------------
@@ -106,21 +113,6 @@ class App extends BaseConfig
      * If false, no automatic detection will be performed.
      */
     public bool $negotiateLocale = false;
-
-    /**
-     * --------------------------------------------------------------------------
-     * Supported Locales
-     * --------------------------------------------------------------------------
-     *
-     * If $negotiateLocale is true, this array lists the locales supported
-     * by the application in descending order of priority. If no match is
-     * found, the first locale will be used.
-     *
-     * IncomingRequest::setLocale() also uses this list.
-     *
-     * @var list<string>
-     */
-    public array $supportedLocales = ['en'];
 
     /**
      * --------------------------------------------------------------------------

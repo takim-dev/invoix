@@ -26,6 +26,10 @@ class AuthFilter implements FilterInterface {
 
         // Allow public routes
         $publicRoutes = ['login', 'register', 'logout', 'about', 'contact'];
+        // Allow language switch route (GET /language/{locale})
+        if (str_starts_with($path, 'language/')) {
+            return;
+        }
         foreach ($publicRoutes as $route) {
             if ($path === $route) {
                 return;
